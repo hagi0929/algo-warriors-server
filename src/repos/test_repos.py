@@ -2,7 +2,7 @@ from src import db
 from sqlalchemy.sql import text
 from sqlalchemy import inspect
 
-def test_setup() -> None:
+def test_setup_repos() -> None:
   with db.engine.connect() as connection:
     connection.execute(text("""
         CREATE TABLE IF NOT EXISTS test (
@@ -15,12 +15,12 @@ def test_setup() -> None:
     """))
     connection.commit()
 
-def list_tables() -> list[str]:
+def list_tables_repos() -> list[str]:
     inspector = inspect(db.engine)
     tables = inspector.get_table_names()
     return tables
 
-def get_test() -> str:
+def get_test_repos() -> str:
   dd = ""
   with db.engine.connect() as connection:
     result = connection.execute(text("""

@@ -1,16 +1,22 @@
 from flask import Flask
 import os
-from src.config.config import Config
+from src.config.config import DevConfig
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy import event
+from flask_sqlalchemy import SQLAlchemy
 
-# loading environment variables
 load_dotenv()
 
-# declaring flask application
 app = Flask(__name__)
 
-# calling the dev configuration
-config = Config().dev_config
+config = DevConfig()
 
-# making our application to use dev env
-app.env = config.ENV
+
+app.config['SQLALCHEMY_DATABASE_URI'] = config.get_db_conn()
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+
+from src.controllers import api
+app.register_blueprint(api)

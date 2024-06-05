@@ -27,9 +27,9 @@ LIST_FILES = [
     # services
     "src/services/__init__.py",
     "src/services/jwt_service.py",
-    # routes and utils
+    # routes and helpers
     "src/routes.py",
-    "src/utils.py",
+    "src/helpers.py",
 ]
 
 for file_path in LIST_FILES:

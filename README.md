@@ -1,11 +1,13 @@
-## project setup
-#### linux
-if python and pythonvenv is not installed
+# CS348 Project Server
+
+### Prerequisite
+python3, pythonvenv
 ```
-apt-get update -y
-python3-venv
+sudo apt install python3.11
+sudo apt install python3.11-venv
 ```
-then
+
+### basic setup - Linux
 ```
 make init
 ````

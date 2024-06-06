@@ -13,6 +13,14 @@ run-production:
 init:
 	@sh ${SETUP_DIR}/init_setup.sh
 
+.PHONY: export-env
+export:
+	@conda env export > environment.yaml
+
+.PHONY: import-env
+import:
+	@conda env update --file environment.yaml --prune
+
 .PHONY: clean
 clean:
 	rm -rf env

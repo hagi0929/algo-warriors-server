@@ -1,8 +1,0 @@
-flask
-pathlib
-python-dotenv
-PyJWT
-Flask-SQLAlchemy
-Flask-Migrate
-flask-bcrypt
-psycopg2-binary

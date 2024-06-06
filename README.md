@@ -18,7 +18,7 @@ the above command installs all the requirment libraries to run this app
 
 Then, copy rename template.env file to .env and fill up the database connection strings.
 
-After these steps are good to go run the app with command below
+After these steps we are good to go run the app with command below
 
 ```
 make run

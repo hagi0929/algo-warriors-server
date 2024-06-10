@@ -3,7 +3,7 @@ FLASK := FLASK_APP=$(FLASK_APP) env/bin/flask
 SETUP_DIR := ./setup
 .PHONY: run
 run:
-	flask run --debug
+	flask run
 
 .PHONY: run-prod
 run-production:

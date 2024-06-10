@@ -1,0 +1,3 @@
+name: cs348-env
+channels:
+  - defaults

@@ -14,11 +14,11 @@ init:
 	@sh ${SETUP_DIR}/init_setup.sh
 
 .PHONY: export-env
-export:
-	@conda env export > environment.yaml
+export-env:
+	@conda env export | grep -v "^prefix: " > environment.yml
 
 .PHONY: import-env
-import:
+import-env:
 	@conda env update --file environment.yaml --prune
 
 .PHONY: clean

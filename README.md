@@ -21,15 +21,19 @@ rm -rf ~/miniconda3/miniconda.sh
 ### basic setup - Linux
 ```
 make init
-````
-the above command installs all the requirment libraries to run this app
+```
+if make init has some errors run commands below one by one make init just calls init_setup.sh inside the setup folder so try to run the command on the bashscript one by one
 
-Then, copy rename template.env file to .env and fill up the database connection strings.
+Then, copy rename template.env file to .env (already done in make init) and fill up the database connection strings on .env (not on template.env).
 
 After these steps we are good to go run the app with command below
 
 ```
 make run
+```
+or 
+```
+flask run
 ```
 
 ---

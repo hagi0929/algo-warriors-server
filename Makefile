@@ -1,3 +1,5 @@
+.ONESHELL:
+
 FLASK_APP = app.py
 FLASK := FLASK_APP=$(FLASK_APP) env/bin/flask
 SETUP_DIR := ./setup
@@ -17,9 +19,9 @@ init:
 export-env:
 	@conda env export | grep -v "^prefix: " > environment.yml
 
-.PHONY: import-env
-import-env:
-	@conda env update --file environment.yaml --prune
+.PHONY: update-env
+import-env: 
+	conda env update --file environment.yaml --prune
 
 .PHONY: clean
 clean:

@@ -23,11 +23,6 @@ def insert_data():
     user_data = read_json_file('setup/populate_table/users.json')
 
     connection = psycopg2.connect(
-        database='cs348proj',
-        user='cs348',
-        password='cs348',
-        host='132.145.98.138',
-        port='5432'
     )
     # cursor = connection.cursor()
     

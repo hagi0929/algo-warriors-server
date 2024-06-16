@@ -2,20 +2,16 @@ import psycopg2
 import json
 
 
-# Function to read JSON file
 def read_json_file(file_path):
     with open(file_path, 'r') as json_file:
         return json.load(json_file)
 
 
-# Function to insert data into the database
 def insert_data():
-    # Read data from JSON files
     user_data = read_json_file('users.json')
     problem_data = read_json_file('problems.json')
     test_case_data = read_json_file('test_cases.json')
 
-    # Database connection parameters
     db_params = {
         'dbname': 'cs348proj',
         'user': 'cs348',
@@ -24,23 +20,11 @@ def insert_data():
         'port': '5432'
     }
 
-    # Connect to the PostgreSQL database
     print("Attempting to connect to the database...")
     connection = psycopg2.connect(**db_params)
     print("Connection established.")
     cursor = connection.cursor()
 
-    # try:
-    #     insert_user_query = """
-    #     INSERT INTO ServiceUser (user_id, username, email, password)
-    #     VALUES (%s, %s, %s, %s)
-    #     RETURNING user_id
-    #     """
-    #     cursor.execute(insert_user_query, (user_data['user_id'], user_data['username'], user_data['email'], user_data['password']))
-    #     user_id = cursor.fetchone()[0]
-    # except:
-    #     user_id = 1
-    # Insert problems    #
     user_id = 1
     insert_problem_query = """
     INSERT INTO Problem (problem_id, title, description, difficulty, created_by)

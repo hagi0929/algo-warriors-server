@@ -5,12 +5,14 @@ import psycopg2
 class Config:
     HOST = '0.0.0.0'
     PORT = 80
+
     def get_db_conn(self) -> None:
         raise NotImplementedError()
 
 class DevConfig(Config):
     ENV = "development"
     PORT = 3000
+    DEBUG = True
     def get_db_conn(self) -> None:
         host=os.environ.get("DB_HOST")
         port=os.environ.get("DB_PORT")
@@ -22,6 +24,7 @@ class DevConfig(Config):
         return connectionParam
 
 class ProdConfig(Config):
+    DEBUG = False
     def get_db_conn(self) -> None:
         host=os.environ.get("DB_HOST")
         port=os.environ.get("DB_PORT")

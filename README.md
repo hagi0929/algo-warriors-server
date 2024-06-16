@@ -38,6 +38,7 @@ flask run
 
 ---
 ## conventions
+* RESTful api
 * try best to use type hint
 * controller, service, repos pattern for the architecture
 * follow python conventions for all the varible and file names

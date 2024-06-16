@@ -1,4 +1,5 @@
 from ..model.tag import Tag
+from ..model.problem import ProblemDetailed
 from ..repos.tag_repos import TagRepos
 
 
@@ -19,3 +20,11 @@ class TagService:
     @staticmethod
     def delete_tag(tag_id: int) -> bool:
         return TagRepos.delete_tag(tag_id)
+    
+    @staticmethod
+    def find_problems_by_tag(tag_type: str, tag_content: str) -> list[ProblemDetailed]:
+        return TagRepos.find_problems_by_tag(tag_type, tag_content)
+
+    @staticmethod
+    def list_all_problems_with_tags() -> list[dict]:
+        return TagRepos.list_all_problems_with_tags()

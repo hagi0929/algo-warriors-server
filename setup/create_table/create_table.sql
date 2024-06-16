@@ -70,3 +70,10 @@ CREATE TABLE Tag(
     content TEXT NOT NULL
 )
 
+CREATE TABLE ProblemTag (
+    problem_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    PRIMARY KEY (problem_id, tag_id),
+    FOREIGN KEY (problem_id) REFERENCES Problem(problem_id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES Tag(tag_id) ON DELETE CASCADE
+);

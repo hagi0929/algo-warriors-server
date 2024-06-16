@@ -1,7 +1,7 @@
 from sqlalchemy.sql import text
 from .. import db
 from ..model.tag import Tag
-
+from ..model.problem import ProblemDetailed
 
 class TagRepos:
     @staticmethod
@@ -61,3 +61,36 @@ class TagRepos:
         result = db.session.execute(query, {'tid': tag_id})
         db.session.commit()
         return result.rowcount > 0
+    
+    @staticmethod
+    def find_problems_by_tag(tag_type: str, tag_content: str) -> list[ProblemDetailed]:
+        query = text("""
+        SELECT P.problem_id, P.title, P.description, P.difficulty, P.created_by, P.created_at
+        FROM Problem P
+        JOIN ProblemTag PT ON P.problem_id = PT.problem_id
+        JOIN Tag T ON PT.tag_id = T.tag_id
+        WHERE T.type = :tag_type AND T.content = :tag_content
+        """)
+        result = db.session.execute(query, {'tag_type': tag_type, 'tag_content': tag_content})
+        problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4], row[5]) for row in result]
+        return problems
+
+    @staticmethod
+    def list_all_problems_with_tags() -> list[dict]:
+        query = text("""
+        SELECT P.problem_id, P.title, T.type, T.content
+        FROM Problem P
+        JOIN ProblemTag PT ON P.problem_id = PT.problem_id
+        JOIN Tag T ON PT.tag_id = T.tag_id
+        ORDER BY P.problem_id, T.type
+        """)
+        result = db.session.execute(query)
+        problems_with_tags = []
+        for row in result:
+            problems_with_tags.append({
+                'problem_id': row[0],
+                'title': row[1],
+                'type': row[2],
+                'content': row[3]
+            })
+        return problems_with_tags

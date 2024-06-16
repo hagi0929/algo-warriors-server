@@ -47,6 +47,23 @@ def delete_tag(tag_id):
         return jsonify({'message': 'Tag deleted successfully'}), 200
     return jsonify({'message': 'Tag not found'}), 404
 
-@tag_bp.route('/test', methods=['GET'])
-def test():
-    return jsonify({'message': 'Cool'}), 200
+
+@tag_bp.route('/difficulty/<string:difficulty>', methods=['GET'])
+def get_problems_by_difficulty(difficulty):
+    problems = TagService.find_problems_by_tag('difficulty', difficulty)
+    return jsonify([problem.to_dict() for problem in problems])
+
+@tag_bp.route('/subcategory/<string:subcategory>', methods=['GET'])
+def get_problems_by_subcategory(subcategory):
+    problems = TagService.find_problems_by_tag('subcategory', subcategory)
+    return jsonify([problem.to_dict() for problem in problems])
+
+@tag_bp.route('/source/<string:source>', methods=['GET'])
+def get_problems_by_source(source):
+    problems = TagService.find_problems_by_tag('source', source)
+    return jsonify([problem.to_dict() for problem in problems])
+
+@tag_bp.route('/with_tags', methods=['GET'])
+def list_problems_with_tags():
+    problems_with_tags = TagService.list_all_problems_with_tags()
+    return jsonify(problems_with_tags)

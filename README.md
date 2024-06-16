@@ -1,5 +1,6 @@
 # CS348 Project Server
 
+## make file has bugs do not use that to setup project. just make conda env from the environment.yml does basic set up for you
 ### Prerequisite
 miniconda - linux
 ```

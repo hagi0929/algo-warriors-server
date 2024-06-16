@@ -28,3 +28,16 @@ CREATE TABLE TestCase (
     output TEXT NOT NULL,
     FOREIGN KEY (problem_id) REFERENCES Problem(problem_id) ON DELETE CASCADE
 );
+
+CREATE TABLE Discussion (
+    discussion_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    parentdiscussion_id INT DEFAULT NULL,
+    problem_id INT NOT NULL,
+    user_id INT NOT NULL,
+    content VARCHAR(500) NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (parentdiscussion_id) REFERENCES Discussion(discussion_id),
+    FOREIGN KEY (problem_id) REFERENCES Problem(problem_id),
+    FOREIGN KEY (user_id) REFERENCES ServiceUser(user_id)
+);

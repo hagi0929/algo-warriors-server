@@ -1,11 +1,9 @@
 from flask import Blueprint
-from .test_controller import test
 from .problem_controller import problem_bp
 from werkzeug.exceptions import HTTPException
 
 api = Blueprint('api', __name__)
 
-api.register_blueprint(test, url_prefix="/test")
 api.register_blueprint(problem_bp, url_prefix="/problem")
 
 

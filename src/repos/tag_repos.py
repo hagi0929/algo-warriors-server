@@ -162,3 +162,15 @@ class TagRepos:
         """)
         db.session.execute(query, {'problem_id': problem_id, 'tag_id': tag_id})
         db.session.commit()
+    
+    @staticmethod
+    def get_tags_of_problem(problem_id) -> list[Tag]:
+        query = text("""
+        SELECT T.tag_id, T.type, T.content
+        FROM Tag T
+        JOIN ProblemTag PT ON T.tag_id = PT.tag_id
+        WHERE PT.problem_id = :pid
+        """)
+        result = db.session.execute(query, {'pid': problem_id})
+        tags = [Tag(row[0], row[1], row[2]) for row in result]
+        return tags

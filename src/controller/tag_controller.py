@@ -87,3 +87,8 @@ def list_problems_with_tags():
 def recommend_problems(problem_id):
     problems = TagService.recommend_problems(problem_id)
     return jsonify([problem.to_dict() for problem in problems])
+
+@tag_bp.route('/<int:problem_id>', methods=['GET'])
+def get_tags_of_problem(problem_id):
+    tags = TagService.get_tags_of_problem(problem_id)
+    return jsonify([tag.to_dict() for tag in tags])

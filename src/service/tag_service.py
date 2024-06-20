@@ -27,7 +27,7 @@ class TagService:
     @staticmethod
     def add_tag_to_problem(problem_id: str, tag_id:str):
         TagRepos.add_tag_to_problem(problem_id, tag_id)
-        
+
     @staticmethod
     def find_problems_with_multiple_tags(difficulty_tags: list[str], subcategory_tags: list[str], source_tags: list[str]) -> list[ProblemDetailed]:
         return TagRepos.find_problems_with_multiple_tags(difficulty_tags, subcategory_tags, source_tags)
@@ -39,3 +39,7 @@ class TagService:
     @staticmethod
     def recommend_problems(problem_id) -> list[ProblemDetailed]:
         return TagRepos.recommend_problems(problem_id)
+
+    @staticmethod
+    def get_tags_of_problem(problem_id) -> list[Tag]:
+        return TagRepos.get_tags_of_problem(problem_id)

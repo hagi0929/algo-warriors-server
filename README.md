@@ -87,4 +87,9 @@
      flask run
      ```
 
+#### Currently supported features:
+1. Problems: Users can create, view, and solve coding problems.
+2. Problem Tags/Filtering: Problems can be categorized and filtered by tags like difficulty level.
+3. Discussions: Users can engage in discussions and comment on problems.
+4. Contests: Users can participate in time-bound contests and view rankings based on their scores.
 

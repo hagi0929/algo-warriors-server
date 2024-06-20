@@ -153,4 +153,12 @@ class TagRepos:
         result = db.session.execute(query, {'pid': problem_id})
         problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]
         return problems
-                
+    
+    @staticmethod
+    def add_tag_to_problem(problem_id: str, tag_id:str):
+        query = text("""
+        INSERT INTO ProblemTag (problem_id, tag_id)
+        VALUES (:problem_id, :tag_id)
+        """)
+        db.session.execute(query, {'problem_id': problem_id, 'tag_id': tag_id})
+        db.session.commit()

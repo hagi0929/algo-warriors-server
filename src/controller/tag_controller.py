@@ -53,11 +53,11 @@ def get_problems_by_difficulty(difficulty):
     problems = TagService.find_problems_by_tag('difficulty', difficulty)
     return jsonify([problem.to_dict() for problem in problems])
 
-@tag_bp.route('/difficulty/<string:difficulty>/subcategory/<string:subcategory>', methods=['GET'])
-def get_problems_by_difficulty_and_subcategory(difficulty, subcategory):
-    problems = TagService.find_problems_by_tag('difficulty', difficulty)
-    problems = [problem for problem in problems if problem.subcategory == subcategory]
-    return jsonify([problem.to_dict() for problem in problems])
+@tag_bp.route('/add_tag_to_problem', methods=['POST'])
+def add_tag_to_problem(problem_id, tag_id):
+    TagService.add_tag_to_problem(problem_id, tag_id)
+    return jsonify({'message': 'Tag added to problem'}), 200
+    
 
 @tag_bp.route('/multiple', methods=['POST'])
 def get_problems_with_multiple_subcategory_tags():

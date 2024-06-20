@@ -1,4 +1,4 @@
-## Simplified Database Setup Guide
+# Setup
 
 ### Prerequisites
 - **Miniconda** (for managing the Python environment)

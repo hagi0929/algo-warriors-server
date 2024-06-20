@@ -1,5 +1,3 @@
-Got it! Let's simplify the instructions and make sure to cover filling in the `.env` file and the `populate_table.py` script for the database connection strings.
-
 ## Simplified Database Setup Guide
 
 ### Prerequisites

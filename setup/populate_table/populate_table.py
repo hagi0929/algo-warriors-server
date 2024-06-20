@@ -13,11 +13,11 @@ def insert_data():
     test_case_data = read_json_file('test_cases.json')
 
     db_params = {
-        'dbname': 'cs348proj',
-        'user': 'cs348',
-        'password': 'cs348',
-        'host': '132.145.98.138',
-        'port': '5432'
+        'dbname': '',
+        'user': '',
+        'password': '',
+        'host': '',
+        'port': ''
     }
 
     print("Attempting to connect to the database...")

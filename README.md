@@ -1,47 +1,92 @@
-# CS348 Project Server
+Got it! Let's simplify the instructions and make sure to cover filling in the `.env` file and the `populate_table.py` script for the database connection strings.
 
-## make file has bugs do not use that to setup project. just make conda env from the environment.yml does basic set up for you
-### Prerequisite
-miniconda - linux
-```
-mkdir -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-rm -rf ~/miniconda3/miniconda.sh
-~/miniconda3/bin/conda init bash
-```
-miniconda - mac
-```
-mkdir -p ~/miniconda3
-curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
-bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-rm -rf ~/miniconda3/miniconda.sh
-~/miniconda3/bin/conda init bash
-```
+## Simplified Database Setup Guide
 
-### basic setup - Linux
-```
-make init
-```
-if make init has some errors run commands below one by one make init just calls init_setup.sh inside the setup folder so try to run the command on the bashscript one by one
+### Prerequisites
+- **Miniconda** (for managing the Python environment)
 
-Then, copy rename template.env file to .env (already done in make init) and fill up the database connection strings on .env (not on template.env).
+### Step-by-Step Instructions
 
-After these steps we are good to go run the app with command below
+#### 1. **Install Miniconda**
+   - **Linux:**
+     ```bash
+     mkdir -p ~/miniconda3
+     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+     bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+     rm -rf ~/miniconda3/miniconda.sh
+     ~/miniconda3/bin/conda init bash
+     ```
+   - **Mac:**
+     ```bash
+     mkdir -p ~/miniconda3
+     curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
+     bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+     rm -rf ~/miniconda3/miniconda.sh
+     ~/miniconda3/bin/conda init bash
+     ```
 
-```
-make run
-```
-or 
-```
-flask run
-```
+#### 2. **Set Up the Python Environment**
+   - Create the environment using the `environment.yml` file:
+     ```bash
+     conda env create -f environment.yml
+     conda activate your_environment_name  # Replace with the environment name specified in environment.yml
+     ```
 
----
-## conventions
-* RESTful api
-* try best to use type hint
-* controller, service, repos pattern for the architecture
-* follow python conventions for all the varible and file names
-* we will use sqlalchemy for the db library but not it's orm. 
-* add more things
+#### 3. **Configure Database Connection Strings**
+   - **Fill the `.env` File**:
+     - Copy and rename the `template.env` file to `.env`:
+       ```bash
+       cp template.env .env
+       ```
+     - Edit the `.env` file to include your database connection string. It should look something like this:
+       ```
+        DB_HOST = ''
+        DB_PORT = ''
+        DB_DATABASE_PROD = ''
+        DB_DATABASE_DEV = ''
+        DB_USER = ''
+        DB_PASSWORD = ''
+        ```
+
+   - **Update `populate_table.py`**:
+     - Open `populate_table.py` and update lines 15 and 21 with your database connection string. It should look something like this:
+       ```python
+        db_params = {
+        'dbname': '',
+        'user': '',
+        'password': '',
+        'host': '',
+        'port': ''
+        }
+       ```
+
+#### 4. **Set Up the Database**
+   - Navigate to the `setup` folder:
+     ```bash
+     cd setup
+     ```
+
+   - Run the SQL scripts to create the tables:
+     ```bash
+     psql -U your_db_user -d your_db_name -f create_table/create_table.sql
+     ```
+
+#### 5. **Import Data**
+   - Run the script to fetch and format the data:
+     ```bash
+     python populate_table/generate_db.py
+     ```
+   - This script will format the data and save it as `.json` files in the `populate_table` folder.
+
+   - Populate the database with the JSON data:
+     ```bash
+     python populate_table/populate_table.py
+     ```
+
+#### 6. **Run the Application**
+   - You can start the application using the following command:
+     ```bash
+     flask run
+     ```
+
+

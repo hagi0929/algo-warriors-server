@@ -25,8 +25,8 @@ class TagService:
         return TagRepos.find_problems_by_tag(tag_type, tag_content)
     
     @staticmethod
-    def find_problems_with_multiple_subcategory_tags(tags: list[str]) -> list[ProblemDetailed]:
-        return TagRepos.find_problems_with_multiple_subcategory_tags(tags)
+    def find_problems_with_multiple_tags(difficulty_tags: list[str], subcategory_tags: list[str], source_tags: list[str]) -> list[ProblemDetailed]:
+        return TagRepos.find_problems_with_multiple_tags(difficulty_tags, subcategory_tags, source_tags)
 
     @staticmethod
     def list_all_problems_with_tags() -> list[dict]:

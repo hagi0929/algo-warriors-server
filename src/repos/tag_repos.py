@@ -96,17 +96,34 @@ class TagRepos:
         return problems_with_tags
 
     @staticmethod
-    def find_problems_with_multiple_subcategory_tags(tags: list[str]) -> list[ProblemDetailed]:
-        query = text("""
-        SELECT DISTINCT P.problem_id, P.title, P.description, P.created_by, P.created_at
+    def find_problems_with_multiple_tags(difficulty_tags: list[str], subcategory_tags: list[str], source_tags: list[str]) -> list[ProblemDetailed]:
+        query = text(
+        """
+        SELECT P.problem_id, P.title, P.description, P.created_by, P.created_at
         FROM Problem P
         JOIN ProblemTag PT ON P.problem_id = PT.problem_id
         JOIN Tag T ON PT.tag_id = T.tag_id
-        WHERE T.content IN :tags
+        WHERE (T.type = 'difficulty' AND (T.content IN :difficulty_tags OR :difficulty_tags_is_empty = 1))
+        AND (T.type = 'subcategory' AND (T.content IN :subcategory_tags OR :subcategory_tags_is_empty = 1))
+        AND (T.type = 'source' AND (T.content IN :source_tags OR :source_tags_is_empty = 1))
         """)
-        result = db.session.execute(query, {'tags': tuple(tags), 'tag_count': len(tags)})
+        
+        difficulty_tags_is_empty = 1 if not difficulty_tags else 0
+        subcategory_tags_is_empty = 1 if not subcategory_tags else 0
+        source_tags_is_empty = 1 if not source_tags else 0
+        
+        result = db.session.execute(query, {
+            'difficulty_tags': difficulty_tags, 
+            'subcategory_tags': subcategory_tags, 
+            'source_tags': source_tags,
+            'difficulty_tags_is_empty': difficulty_tags_is_empty,
+            'subcategory_tags_is_empty': subcategory_tags_is_empty,
+            'source_tags_is_empty': source_tags_is_empty
+        })
+        
         problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]
         return problems
+
     
      # Recommend at most 5 problems with same tag and difficulty
     @staticmethod

@@ -59,14 +59,13 @@ def get_problems_by_difficulty_and_subcategory(difficulty, subcategory):
     problems = [problem for problem in problems if problem.subcategory == subcategory]
     return jsonify([problem.to_dict() for problem in problems])
 
-@tag_bp.route('/multiple/subcategory', methods=['POST'])
+@tag_bp.route('/multiple', methods=['POST'])
 def get_problems_with_multiple_subcategory_tags():
     data = request.get_json()
-    tags = data.get('tags', [])
-    if not isinstance(tags, list):
-        return jsonify({"error": "Tags must be a list"}), 400
-    print(tags)
-    problems = TagService.find_problems_with_multiple_subcategory_tags(tags)
+    difficulty_tags = data.get('difficulty', [])
+    subcategory_tags = data.get('subcategory', [])
+    source_tags = data.get('source', [])
+    problems = TagService.find_problems_with_multiple_tags(difficulty_tags, subcategory_tags, source_tags)
     return jsonify([problem.to_dict() for problem in problems])
 
 @tag_bp.route('/subcategory/<string:subcategory>', methods=['GET'])

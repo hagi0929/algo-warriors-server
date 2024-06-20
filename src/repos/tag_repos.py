@@ -65,14 +65,14 @@ class TagRepos:
     @staticmethod
     def find_problems_by_tag(tag_type: str, tag_content: str) -> list[ProblemDetailed]:
         query = text("""
-        SELECT P.problem_id, P.title, P.description, P.difficulty, P.created_by, P.created_at
+        SELECT P.problem_id, P.title, P.description, P.created_by, P.created_at
         FROM Problem P
         JOIN ProblemTag PT ON P.problem_id = PT.problem_id
         JOIN Tag T ON PT.tag_id = T.tag_id
         WHERE T.type = :tag_type AND T.content = :tag_content
         """)
         result = db.session.execute(query, {'tag_type': tag_type, 'tag_content': tag_content})
-        problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4], row[5]) for row in result]
+        problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]
         return problems
 
     @staticmethod
@@ -98,21 +98,21 @@ class TagRepos:
     @staticmethod
     def find_problems_with_multiple_subcategory_tags(tags: list[str]) -> list[ProblemDetailed]:
         query = text("""
-        SELECT DISTINCT P.problem_id, P.title, P.description, P.difficulty, P.created_by, P.created_at
+        SELECT DISTINCT P.problem_id, P.title, P.description, P.created_by, P.created_at
         FROM Problem P
         JOIN ProblemTag PT ON P.problem_id = PT.problem_id
         JOIN Tag T ON PT.tag_id = T.tag_id
         WHERE T.content IN :tags
         """)
         result = db.session.execute(query, {'tags': tuple(tags), 'tag_count': len(tags)})
-        problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4], row[5]) for row in result]
+        problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]
         return problems
     
      # Recommend at most 5 problems with same tag and difficulty
     @staticmethod
     def recommend_problems(problem_id) -> list[ProblemDetailed]:
         query = text("""
-        SELECT P.problem_id, P.title, P.description, P.difficulty, P.created_by, P.created_at
+        SELECT P.problem_id, P.title, P.description, P.created_by, P.created_at
         FROM Problem P
         JOIN ProblemTag PT ON P.problem_id = PT.problem_id
         JOIN Tag T ON PT.tag_id = T.tag_id
@@ -134,6 +134,6 @@ class TagRepos:
         LIMIT 5
         """)
         result = db.session.execute(query, {'pid': problem_id})
-        problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4], row[5]) for row in result]
+        problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]
         return problems
                 

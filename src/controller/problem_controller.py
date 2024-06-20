@@ -14,7 +14,6 @@ def create_problem():
         problem_request = ProblemCreationRequest(
             title=data['title'],
             description=data['description'],
-            difficulty=data['difficulty'],
             created_by=data['created_by'],
             tags=data.get('tags', []),
             test_cases=data.get('test_cases', [])
@@ -24,7 +23,6 @@ def create_problem():
             'problem_id': problem_id,
             'title': problem_request.title,
             'description': problem_request.description,
-            'difficulty': problem_request.difficulty,
             'created_by': problem_request.created_by,
             'tags': problem_request.tags,
             'test_cases': problem_request.test_cases

@@ -4,19 +4,21 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Discussion:
-    discussion_id: int = field(init=False) 
-    parentdiscussion_id: Optional[int]
-    problem_id: int
-    user_id: int
-    content: str
-    created_at: datetime = field(default_factory=datetime.now)
-    updated_at: datetime = field(default_factory=datetime.now)
+    def __init__(self, discussion_id, parentdiscussion_id, problem_id, user_id, content, created_at, updated_at):
+        self.discussion_id = discussion_id
+        self.parentdiscussion_id = parentdiscussion_id
+        self.problem_id = problem_id
+        self.user_id = user_id
+        self.content = content
+        self.created_at = created_at
+        self.updated_at = updated_at
+
 
     def to_dict(self) -> dict:
         return {
             'discussion_id': self.discussion_id,
-            'parentdiscussion_id': self.parentdiscussion_id,
             'problem_id': self.problem_id,
+            'parentdiscussion_id': self.parentdiscussion_id,
             'user_id': self.user_id,
             'content': self.content,
             'created_at': self.created_at.isoformat(),
@@ -29,16 +31,16 @@ class Discussion:
 
 class DiscussionCreationRequest:
     def __init__(self, parentdiscussion_id: Optional[int], problem_id: int, user_id: int, content: str):
-        self.parentdiscussion_id: Optional[int] = parentdiscussion_id
         self.problem_id: int = problem_id
+        self.parentdiscussion_id: Optional[int] = parentdiscussion_id
         self.user_id: int = user_id
         self.content: str = content
 
     def validate(self):
-        if not isinstance(self.parentdiscussion_id, (int, type(None))):
-            raise ValueError("Parent discussion ID must be an integer or None")
         if not isinstance(self.problem_id, int):
             raise ValueError("Problem ID must be an integer")
+        if not isinstance(self.parentdiscussion_id, (int, type(None))):
+            raise ValueError("Parent discussion ID must be an integer or None")
         if not isinstance(self.user_id, int):
             raise ValueError("User ID must be an integer")
         if not self.content or not isinstance(self.content, str):

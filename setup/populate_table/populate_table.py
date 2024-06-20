@@ -12,6 +12,8 @@ def insert_data():
     problem_data = read_json_file('problems.json')
     test_case_data = read_json_file('test_cases.json')
 
+    discussions_data = read_json_file('discussions.json')
+
     db_params = {
         'dbname': '',
         'user': '',
@@ -50,6 +52,21 @@ def insert_data():
             connection = psycopg2.connect(**db_params)
             cursor = connection.cursor()
             continue
+
+    # Insert discussion data
+    insert_discussion_query = """
+    INSERT INTO Discussion (problem_id, parentdiscussion_id, user_id, content, created_at, updated_at)
+    VALUES (%s, %s, %s, %s, %s, %s)
+    """
+    for discussion in discussions_data:
+        try:
+            cursor.execute(insert_discussion_query, (
+                discussion['problem_id'], discussion['parentdiscussion_id'], discussion['user_id'],
+                discussion['content'], discussion['created_at'], discussion['updated_at']))
+        except psycopg2.errors.UniqueViolation:
+            connection.rollback()
+            continue
+
     # Check data before committing
     cursor.execute("SELECT * FROM ServiceUser")
     service_user_rows = cursor.fetchall()
@@ -68,6 +85,13 @@ def insert_data():
     print("\nTestCase Table:")
     for row in test_case_rows:
         print(row)
+
+    cursor.execute("SELECT * FROM Discussion")
+    discussion_rows = cursor.fetchall()
+    print("\nDiscussion Table:")
+    for row in discussion_rows:
+        print(row)
+
     connection.commit()
     cursor.close()
     connection.close()

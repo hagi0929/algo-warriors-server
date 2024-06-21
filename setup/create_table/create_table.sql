@@ -47,16 +47,6 @@ CREATE TABLE UserRole (
     PRIMARY KEY(user_id, role_id)
 );
 
-CREATE TABLE ContestParticipant (
-    contest_id INT,
-    score INT,
-    user_id INT,
-    
-    FOREIGN KEY(contest_id) REFERENCES Contest(contest_id) ON DELETE CASCADE,
-    FOREIGN KEY(user_id) REFERENCES ServiceUser(user_id) ON DELETE CASCADE,
-    PRIMARY KEY(contest_id, user_id)
-);
-
 CREATE TABLE Permission (
     permission_id INT GENERATED ALWAYS AS IDENTITY,
     permission_name TEXT,

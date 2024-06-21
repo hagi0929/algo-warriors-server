@@ -8,11 +8,11 @@ env_vars = dotenv_values('.env')
 # Function to connect to PostgreSQL database
 def connect_db():
     conn_params = {
-        'dbname': 'cs348proj',
-        'user': 'cs348',
-        'password': 'cs348',
-        'host': '132.145.98.138',
-        'port': '5432'
+        'dbname': '',
+        'user': '',
+        'password': '',
+        'host': '',
+        'port': ''
     }
     try:
         print("Attempting to connect to the database...")

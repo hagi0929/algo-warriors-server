@@ -99,13 +99,27 @@ class TagRepos:
     def find_problems_with_multiple_tags(difficulty_tags: list[str], subcategory_tags: list[str], source_tags: list[str]) -> list[ProblemDetailed]:
         query = text(
         """
-        SELECT P.problem_id, P.title, P.description, P.created_by, P.created_at
-        FROM Problem P
+        WITH temp AS (
+            SELECT P.problem_id, P.title, P.created_by, P.created_at
+            FROM Problem P
+            JOIN ProblemTag PT ON P.problem_id = PT.problem_id
+            JOIN Tag T ON PT.tag_id = T.tag_id
+            WHERE T.type = 'difficulty' AND (T.content IN :difficulty_tags OR :difficulty_tags_is_empty = 1)
+        ),
+
+        temp2 as (
+        SELECT P.problem_id, P.title, P.created_by, P.created_at
+        FROM temp P
         JOIN ProblemTag PT ON P.problem_id = PT.problem_id
         JOIN Tag T ON PT.tag_id = T.tag_id
-        WHERE (T.type = 'difficulty' AND (T.content IN :difficulty_tags OR :difficulty_tags_is_empty = 1))
-        AND (T.type = 'subcategory' AND (T.content IN :subcategory_tags OR :subcategory_tags_is_empty = 1))
-        AND (T.type = 'source' AND (T.content IN :source_tags OR :source_tags_is_empty = 1))
+        WHERE T.type = 'subcategory' AND (T.content IN :subcategory_tags OR :subcategory_tags_is_empty = 1)
+        )
+
+        SELECT P.problem_id, P.title, P.created_by, P.created_at
+        FROM temp2 P
+        JOIN ProblemTag PT ON P.problem_id = PT.problem_id
+        JOIN Tag T ON PT.tag_id = T.tag_id
+        WHERE T.type = 'source' AND (T.content IN :source_tags OR :source_tags_is_empty = 1)
         """)
         
         difficulty_tags_is_empty = 1 if not difficulty_tags else 0
@@ -129,26 +143,28 @@ class TagRepos:
     @staticmethod
     def recommend_problems(problem_id) -> list[ProblemDetailed]:
         query = text("""
-        SELECT P.problem_id, P.title, P.description, P.created_by, P.created_at
+        SELECT DISTINCT P.problem_id, P.title, P.created_by, P.created_at
         FROM Problem P
         JOIN ProblemTag PT ON P.problem_id = PT.problem_id
         JOIN Tag T ON PT.tag_id = T.tag_id
         WHERE P.problem_id != :pid
-        
-        T.type = 'difficulty' AND T.content IN (
-            SELECT T.content FROM ProblemTag PT
-            JOIN Tag T ON PT.tag_id = T.tag_id
-            WHERE PT.problem_id = :pid
-            AND T.type = 'difficulty'
+        AND (T.type = 'difficulty' 
+        AND T.content IN (
+        SELECT T.content FROM ProblemTag PT_diff
+        JOIN Tag T ON PT_diff.tag_id = T.tag_id
+        WHERE PT_diff.problem_id = :pid
+        AND T.type = 'difficulty'
         )
-        AND T.type = 'subcategory' AND T.content IN (
-            SELECT T.content FROM ProblemTag PT
-            JOIN Tag T ON PT.tag_id = T.tag_id
-            WHERE PT.problem_id = :pid
-            AND T.type = 'subcategory
-        )
-                     
-        LIMIT 5
+        OR(
+        T.type = 'subcategory' 
+        AND T.content IN (
+            SELECT T.content FROM ProblemTag PT_sub
+            JOIN Tag T ON PT_sub.tag_id = T.tag_id
+            WHERE PT_sub.problem_id = :pid
+            AND T.type = 'subcategory'
+            )
+        ))               
+        LIMIT 5;
         """)
         result = db.session.execute(query, {'pid': problem_id})
         problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]

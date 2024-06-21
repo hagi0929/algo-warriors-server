@@ -1,0 +1,307 @@
+"problem_id"	"title"	"description"
+1	"Another Sorting Problem"	"Andi and Budi were given an assignment to tidy up their bookshelf of n books. Each book is represented by the book title — a string s_i numbered from 1 to n, each with length m. Andi really wants to sort the book lexicographically ascending, while Budi wants to sort it lexicographically descending.
+
+Settling their fight, they decided to combine their idea and sort it asc-desc-endingly, where the odd-indexed characters will be compared ascendingly, and the even-indexed characters will be compared descendingly.
+
+A string a occurs before a string b in asc-desc-ending order if and only if in the first position where a and b differ, the following holds:
+
+  * if it is an odd position, the string a has a letter that appears earlier in the alphabet than the corresponding letter in b; 
+  * if it is an even position, the string a has a letter that appears later in the alphabet than the corresponding letter in b. 
+
+Input
+
+The first line contains two integers n and m (1 ≤ n ⋅ m ≤ 10^6).
+
+The i-th of the next n lines contains a string s_i consisting of m uppercase Latin letters — the book title. The strings are pairwise distinct.
+
+Output
+
+Output n integers — the indices of the strings after they are sorted asc-desc-endingly.
+
+Example
+
+Input
+
+
+5 2
+AA
+AB
+BB
+BA
+AZ
+
+
+Output
+
+
+5 2 1 3 4
+
+Note
+
+The following illustrates the first example.
+
+<image>"
+2	"Building an Amusement Park"	"Mr. Chanek lives in a city represented as a plane. He wants to build an amusement park in the shape of a circle of radius r. The circle must touch the origin (point (0, 0)).
+
+There are n bird habitats that can be a photo spot for the tourists in the park. The i-th bird habitat is at point p_i = (x_i, y_i). 
+
+Find the minimum radius r of a park with at least k bird habitats inside. 
+
+A point is considered to be inside the park if and only if the distance between p_i and the center of the park is less than or equal to the radius of the park. Note that the center and the radius of the park do not need to be integers.
+
+In this problem, it is guaranteed that the given input always has a solution with r ≤ 2 ⋅ 10^5.
+
+Input
+
+The first line contains two integers n and k (1 ≤ n ≤ 10^5, 1 ≤ k ≤ n) — the number of bird habitats in the city and the number of bird habitats required to be inside the park.
+
+The i-th of the next n lines contains two integers x_i and y_i (0 ≤ |x_i|, |y_i| ≤ 10^5) — the position of the i-th bird habitat.
+
+Output
+
+Output a single real number r denoting the minimum radius of a park with at least k bird habitats inside. It is guaranteed that the given input always has a solution with r ≤ 2 ⋅ 10^5.
+
+Your answer is considered correct if its absolute or relative error does not exceed 10^{-4}.
+
+Formally, let your answer be a, and the jury's answer be b. Your answer is accepted if and only if \frac{|a - b|}{max{(1, |b|)}} ≤ 10^{-4}.
+
+Examples
+
+Input
+
+
+8 4
+-3 1
+-4 4
+1 5
+2 2
+2 -2
+-2 -4
+-1 -1
+-6 0
+
+
+Output
+
+
+3.1622776589
+
+
+Input
+
+
+1 1
+0 0
+
+
+Output
+
+
+0.0000000000
+
+Note
+
+In the first example, Mr. Chanek can put the center of the park at (-3, -1) with radius √{10} ≈ 3.162. It can be proven this is the minimum r.
+
+The following illustrates the first example. The blue points represent bird habitats and the red circle represents the amusement park.
+
+<image>"
+3	"Cyclic Sum"	"Denote a cyclic sequence of size n as an array s such that s_n is adjacent to s_1. The segment s[r, l] where l < r is the concatenation of s[r, n] and s[1, l].
+
+You are given an array a consisting of n integers. Define b as the cyclic sequence obtained from concatenating m copies of a. Note that b has size n ⋅ m.
+
+You are given an integer k where k = 1 or k is a prime number. Find the number of different segments in b where the sum of elements in the segment is divisible by k.
+
+Two segments are considered different if the set of indices of the segments are different. For example, when n = 3 and m = 2, the set of indices for segment s[2, 5] is \{2, 3, 4, 5\}, and for segment s[5, 2] is \{5, 6, 1, 2\}. In particular, the segments s[1, 6], s[2,1], …, s[6, 5] are considered as the same segment.
+
+Output the answer modulo 10^9 + 7.
+
+Input
+
+The first line contains three integers n, m, and k (1 ≤ n, m, k ≤ 2 ⋅ 10^5, k = 1 or k is a prime number).
+
+The second line contains n integers a_1, a_2, …, a_n (0 ≤ a_i ≤ 2 ⋅ 10^5).
+
+Output
+
+Output an integer denoting the number of different segments in b where the sum of elements in the segment is divisible by k, modulo 10^9 + 7.
+
+Examples
+
+Input
+
+
+5 1 5
+1 2 3 4 3
+
+
+Output
+
+
+4
+
+
+Input
+
+
+5 1 5
+1 2 3 4 5
+
+
+Output
+
+
+5
+
+
+Input
+
+
+5 4 5
+1 2 3 4 5
+
+
+Output
+
+
+125
+
+Note
+
+In the first example, all valid segments are [1,4], [2, 3], [3, 5], and [4, 2].
+
+In the second example, one of the valid segments is [1, 5]."
+4	"Divisible by Twenty-Five"	"Mr. Chanek has an integer represented by a string s. Zero or more digits have been erased and are denoted by the character _. There are also zero or more digits marked by the character X, meaning they're the same digit.
+
+Mr. Chanek wants to count the number of possible integer s, where s is divisible by 25. Of course, s must not contain any leading zero. He can replace the character _ with any digit. He can also replace the character X with any digit, but it must be the same for every character X.
+
+As a note, a leading zero is any 0 digit that comes before the first nonzero digit in a number string in positional notation. For example, 0025 has two leading zeroes. An exception is the integer zero, (0 has no leading zero, but 0000 has three leading zeroes).
+
+Input
+
+One line containing the string s (1 ≤ |s| ≤ 8). The string s consists of the characters 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, _, and X.
+
+Output
+
+Output an integer denoting the number of possible integer s.
+
+Examples
+
+Input
+
+
+25
+
+
+Output
+
+
+1
+
+
+Input
+
+
+_00
+
+
+Output
+
+
+9
+
+
+Input
+
+
+_XX
+
+
+Output
+
+
+9
+
+
+Input
+
+
+0
+
+
+Output
+
+
+1
+
+
+Input
+
+
+0_25
+
+
+Output
+
+
+0
+
+Note
+
+In the first example, the only possible s is 25.
+
+In the second and third example, s ∈ \{100, 200,300,400,500,600,700,800,900\}.
+
+In the fifth example, all possible s will have at least one leading zero."
+5	"Eye-Pleasing City Park Tour"	"There is a city park represented as a tree with n attractions as its vertices and n - 1 rails as its edges. The i-th attraction has happiness value a_i.
+
+Each rail has a color. It is either black if t_i = 0, or white if t_i = 1. Black trains only operate on a black rail track, and white trains only operate on a white rail track. If you are previously on a black train and want to ride a white train, or you are previously on a white train and want to ride a black train, you need to use 1 ticket.
+
+The path of a tour must be a simple path — it must not visit an attraction more than once. You do not need a ticket the first time you board a train. You only have k tickets, meaning you can only switch train types at most k times. In particular, you do not need a ticket to go through a path consisting of one rail color.
+
+Define f(u, v) as the sum of happiness values of the attractions in the tour (u, v), which is a simple path that starts at the u-th attraction and ends at the v-th attraction. Find the sum of f(u,v) for all valid tours (u, v) (1 ≤ u ≤ v ≤ n) that does not need more than k tickets, modulo 10^9 + 7.
+
+Input
+
+The first line contains two integers n and k (2 ≤ n ≤ 2 ⋅ 10^5, 0 ≤ k ≤ n-1) — the number of attractions in the city park and the number of tickets you have.
+
+The second line contains n integers a_1, a_2,…, a_n (0 ≤ a_i ≤ 10^9) — the happiness value of each attraction.
+
+The i-th of the next n - 1 lines contains three integers u_i, v_i, and t_i (1 ≤ u_i, v_i ≤ n, 0 ≤ t_i ≤ 1) — an edge between vertices u_i and v_i with color t_i. The given edges form a tree.
+
+Output
+
+Output an integer denoting the total happiness value for all valid tours (u, v) (1 ≤ u ≤ v ≤ n), modulo 10^9 + 7.
+
+Examples
+
+Input
+
+
+5 0
+1 3 2 6 4
+1 2 1
+1 4 0
+3 2 1
+2 5 0
+
+
+Output
+
+
+45
+
+
+Input
+
+
+3 1
+1 1 1
+1 2 1
+3 2 0
+
+
+Output
+
+
+10"

@@ -78,10 +78,6 @@ def get_problems_by_source(source):
     problems = TagService.find_problems_by_tag('source', source)
     return jsonify([problem.to_dict() for problem in problems])
 
-@tag_bp.route('/with_tags', methods=['GET'])
-def list_problems_with_tags():
-    problems_with_tags = TagService.list_all_problems_with_tags()
-    return jsonify(problems_with_tags)
 
 @tag_bp.route('/recommend/<int:problem_id>', methods=['GET'])
 def recommend_problems(problem_id):

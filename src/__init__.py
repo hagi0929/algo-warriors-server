@@ -5,6 +5,7 @@ from src.repos import db
 from flask_jwt_extended import JWTManager
 import redis
 
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -23,3 +24,6 @@ redis_db = redis.Redis.from_url(config.get_redis_conn())
 from .controller.routes import api
 
 app.register_blueprint(api)
+
+from .middleware.middleware import create_middleware
+create_middleware(app)

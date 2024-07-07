@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 
+from src.middleware.middleware import require_auth
 from src.model.problem import ProblemCreationRequest
 from src.service.problem_service import ProblemService
 
@@ -7,7 +8,6 @@ problem_bp = Blueprint("problems", __name__)
 
 
 @problem_bp.route('/', methods=['POST'])
-# TODO after middleware: logged in user, with token auth
 def create_problem():
     data = request.get_json()
     try:
@@ -39,7 +39,7 @@ def get_problem_list():
 
 
 @problem_bp.route('/<int:problem_id>', methods=['GET'])
-# TODO after middleware: logged in user, with token auth
+@require_auth([])
 def get_problem(problem_id):
     problem = ProblemService.get_problem_by_id(problem_id)
     if problem:
@@ -48,8 +48,7 @@ def get_problem(problem_id):
 
 
 @problem_bp.route('/<int:problem_id>/submit', methods=['POST'])
-# TODO after auth middleware: logged in user, with token auth
-# TODO after completing user feature: implement submit code
+@require_auth(required_permissions=["submit_code"], pass_auth_info=True)
 def submit_code(problem_id):
     code = request.json.get('code')  # TODO after middleware: find safer way to handle param
     result = ProblemService.submit_code(problem_id, code)

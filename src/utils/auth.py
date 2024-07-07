@@ -1,11 +1,10 @@
-import bcrypt
-import jwt
-from src import jwt
+from bcrypt import hashpw, gensalt, checkpw
 
 
-def ecode_string(pwd: str) -> bytes:
-    return bcrypt.hashpw(pwd.encode("utf-8"), bcrypt.gensalt())
+def hash_password(password: str) -> str:
+    hashed = hashpw(password.encode('utf-8'), gensalt())
+    return hashed.decode('utf-8')
 
 
-def check_pwd(pwd: str, hashed_pwd: bytes) -> bool:
-    return bcrypt.checkpw(bcrypt.checkpw(pwd.encode("utf-8"), hashed_pwd))
+def check_password(provided_password: str, stored_password: str) -> bool:
+    return checkpw(provided_password.encode('utf-8'), stored_password.encode('utf-8'))

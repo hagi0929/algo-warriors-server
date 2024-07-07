@@ -1,5 +1,7 @@
-from src import redis_db
+from typing import List
 
+from src import redis_db, db
+from .user_repos import UserRepos
 
 class RedisRepos:
 
@@ -8,8 +10,8 @@ class RedisRepos:
         return redis_db.get(f"token:{token}")
 
     @staticmethod
-    def store_token_and_role(token: str, role: str):
-        redis_db.setex(f"token:{token}", 3600, role)
+    def store_token_and_role(token: str, role_id: int):
+        redis_db.setex(f"token:{token}", 3600, role_id)
 
     @staticmethod
     def invalidate_token(token: str):

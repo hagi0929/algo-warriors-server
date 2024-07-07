@@ -1,0 +1,27 @@
+from src import redis_db
+
+
+class RedisRepos:
+
+    @staticmethod
+    def get_role_by_token(token):
+        return redis_db.get(f"token:{token}")
+
+    @staticmethod
+    def store_token_and_role(token: str, role: str):
+        redis_db.setex(f"token:{token}", 3600, role)
+
+    @staticmethod
+    def invalidate_token(token: str):
+        redis_db.delete(f"token:{token}")
+
+    @staticmethod
+    def get_permissions_by_role(role_id: int):
+        permissions = redis_db.get(f"role:{role_id}")
+        if permissions:
+            return eval(permissions)
+        return None
+
+    @staticmethod
+    def store_role_permissions(role, permissions):
+        redis_db.set(f"role:{role}", str(permissions))

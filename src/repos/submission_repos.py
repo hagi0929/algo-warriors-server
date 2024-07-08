@@ -7,7 +7,6 @@ class SubmissionRepos:
         query = text("""
         SELECT testcase_id, input, output FROM TestCase
         WHERE problem_id = :pid
-        LIMIT 20
         """)
         parameters = {'pid': problem_id}
         result = db.session.execute(query, parameters)

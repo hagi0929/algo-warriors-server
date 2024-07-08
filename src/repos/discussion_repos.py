@@ -11,6 +11,7 @@ class DiscussionRepos:
                 parentdiscussion_id, 
                 problem_id, 
                 user_id, 
+                title, 
                 content, 
                 created_at, 
                 updated_at
@@ -25,9 +26,10 @@ class DiscussionRepos:
                 parentdiscussion_id=row[1],
                 problem_id=row[2],
                 user_id=row[3],
-                content=row[4],
-                created_at=row[5],
-                updated_at=row[6],
+                title=row[4],
+                content=row[5],
+                created_at=row[6],
+                updated_at=row[7],
             ))
         return discussions
 
@@ -38,6 +40,7 @@ class DiscussionRepos:
                 parentdiscussion_id, 
                 problem_id, 
                 user_id, 
+                title, 
                 content, 
                 created_at, 
                 updated_at
@@ -53,9 +56,10 @@ class DiscussionRepos:
                 parentdiscussion_id=row[1],
                 problem_id=row[2],
                 user_id=row[3],
-                content=row[4],
-                created_at=row[5],
-                updated_at=row[6]
+                title=row[4],
+                content=row[5],
+                created_at=row[6],
+                updated_at=row[7],
             )
             return discussion
         else:
@@ -70,6 +74,7 @@ class DiscussionRepos:
                     parentdiscussion_id, 
                     problem_id, 
                     user_id, 
+                    title, 
                     content, 
                     created_at, 
                     updated_at
@@ -83,6 +88,7 @@ class DiscussionRepos:
                     d.parentdiscussion_id, 
                     d.problem_id, 
                     d.user_id, 
+                    d.title, 
                     d.content, 
                     d.created_at, 
                     d.updated_at
@@ -97,6 +103,7 @@ class DiscussionRepos:
                     parentdiscussion_id, 
                     problem_id, 
                     user_id, 
+                    title, 
                     content, 
                     created_at, 
                     updated_at
@@ -115,9 +122,10 @@ class DiscussionRepos:
                 parentdiscussion_id=row[1],
                 problem_id=row[2],
                 user_id=row[3],
-                content=row[4],
-                created_at=row[5],
-                updated_at=row[6]
+                title=row[4],
+                content=row[5],
+                created_at=row[6],
+                updated_at=row[7],
             )
             discussions.append(discussion)
         
@@ -126,14 +134,15 @@ class DiscussionRepos:
     @staticmethod
     def create_discussion(discussion_request: DiscussionCreationRequest) -> int:
         query = text("""
-            INSERT INTO Discussion (parentdiscussion_id, problem_id, user_id, content, created_at, updated_at)
-            VALUES (:parentdiscussion_id, :problem_id, :user_id, :content, NOW(), NOW())
+            INSERT INTO Discussion (parentdiscussion_id, problem_id, user_id, title, content, created_at, updated_at)
+            VALUES (:parentdiscussion_id, :problem_id, :user_id, :title, :content, NOW(), NOW())
             RETURNING discussion_id
         """)
         result = db.session.execute(query, {
             'parentdiscussion_id': discussion_request.parentdiscussion_id,
             'problem_id': discussion_request.problem_id,
             'user_id': discussion_request.user_id,
+            'title': discussion_request.title,
             'content': discussion_request.content
         })
         discussion_id = result.fetchone()[0]
@@ -156,28 +165,6 @@ class DiscussionRepos:
 
     @staticmethod
     def delete_discussion(discussion_id: int) -> None:
-        # First, update the content conditionally
-        # query = text("""
-        #     WITH child_count AS (
-        #         SELECT COUNT(*) AS cnt
-        #         FROM Discussion
-        #         WHERE parentdiscussion_id = :discussion_id
-        #     )
-        #     UPDATE Discussion
-        #     SET content = CASE
-        #         WHEN (SELECT cnt FROM child_count) > 0 THEN '[DELETED MESSAGE]'
-        #         ELSE content
-        #     END
-        #     WHERE discussion_id = :discussion_id;
-        # """)
-        # db.session.execute(query, {'discussion_id': discussion_id})
-
-        # Next, delete the discussion if there are no child discussions
-        # query = text("""
-        #     DELETE FROM Discussion
-        #     WHERE discussion_id = :discussion_id
-        #     AND (SELECT cnt FROM child_count) = 0;
-        # """)
         query = text("""
             UPDATE Discussion
                 SET content = 'DELETED COMMENT', updated_at = NOW()

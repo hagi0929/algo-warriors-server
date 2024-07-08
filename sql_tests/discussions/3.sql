@@ -4,6 +4,7 @@ WITH RECURSIVE subthreads AS (
         parentdiscussion_id, 
         problem_id, 
         user_id, 
+        title, 
         content, 
         created_at, 
         updated_at
@@ -17,6 +18,7 @@ WITH RECURSIVE subthreads AS (
         d.parentdiscussion_id, 
         d.problem_id, 
         d.user_id, 
+        d.title, 
         d.content, 
         d.created_at, 
         d.updated_at
@@ -31,6 +33,7 @@ SELECT DISTINCT discussion_id,
         parentdiscussion_id, 
         problem_id, 
         user_id, 
+        title, 
         content, 
         created_at, 
         updated_at

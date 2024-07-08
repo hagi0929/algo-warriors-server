@@ -8,7 +8,7 @@ class ProblemRepos:
     @staticmethod
     def get_problem_list() -> list[ProblemMinimal]:
         query = text("""
-        SELECT problem_id, title, difficulty FROM Problem
+        SELECT problem_id, title FROM Problem
         """)
         result = db.session.execute(query)
         problems = []
@@ -16,7 +16,6 @@ class ProblemRepos:
             problems.append(ProblemMinimal(
                 problem_id=row[0],
                 title=row[1],
-                difficulty=row[2],
             ))
 
         # TODO add tags
@@ -28,7 +27,7 @@ class ProblemRepos:
     @staticmethod
     def get_problem_by_id(problem_id: int) -> ProblemDetailed:
         query = text("""
-        SELECT problem_id, title, description, difficulty, created_by, created_at FROM Problem p
+        SELECT problem_id, title, description, created_by, created_at FROM Problem p
             NATURAL LEFT JOIN serviceuser u
             WHERE problem_id = :pid
         """)
@@ -39,9 +38,8 @@ class ProblemRepos:
             problem_id=row[0],
             title=row[1],
             description=row[2],
-            difficulty=row[3],
-            created_by=row[4],
-            created_at=row[5],
+            created_by=row[3],
+            created_at=row[4],
         )
         return problem
 
@@ -61,14 +59,13 @@ class ProblemRepos:
     @staticmethod
     def create_problem(problem_request: ProblemCreationRequest) -> int:
         query = text("""
-            INSERT INTO problem (title, description, difficulty, created_by)
-            VALUES (:title, :description, :difficulty, :created_by)
+            INSERT INTO problem (title, description, created_by)
+            VALUES (:title, :description, :created_by)
             RETURNING problem_id
         """)
         result = db.session.execute(query, {
             'title': problem_request.title,
             'description': problem_request.description,
-            'difficulty': problem_request.difficulty,
             'created_by': problem_request.created_by
         })
         problem_id = result.fetchone()[0]

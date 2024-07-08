@@ -15,11 +15,11 @@ def insert_data():
     discussions_data = read_json_file('discussions.json')
 
     db_params = {
-        'dbname': 'cs348proj',
-        'user': 'cs348',
-        'password': 'cs348',
-        'host': '132.145.98.138',
-        'port': '5432'
+        'dbname': '',
+        'user': '',
+        'password': '',
+        'host': '',
+        'port': ''
     }
 
     print("Attempting to connect to the database...")
@@ -29,14 +29,14 @@ def insert_data():
 
     user_id = 1
     insert_problem_query = """
-    INSERT INTO Problem (problem_id, title, description, difficulty, created_by)
+    INSERT INTO Problem (problem_id, title, description, created_by)
     VALUES (%s, %s, %s, %s, %s)
     RETURNING problem_id
     """
     for problem in problem_data:
         try:
             cursor.execute(insert_problem_query, (
-            problem['problem_id'], problem['title'], problem['description'], problem['difficulty'], user_id))
+            problem['problem_id'], problem['title'], problem['description'], user_id))
             problem_id = cursor.fetchone()[0]
 
             # Insert test cases for the problem

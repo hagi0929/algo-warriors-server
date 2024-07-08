@@ -36,11 +36,11 @@ class SubmissionService:
 
         res = conn.getresponse()
         raw_data = res.read()
+        data = json.loads(raw_data)
 
         if res.status != 201:
-            raise ValueError("Submission failed")
-
-        data = json.loads(raw_data)
+            conn.close()
+            return data
 
         # Step 2: Get the results of the submission
         tokens = []
@@ -57,12 +57,31 @@ class SubmissionService:
             raw_data = res.read()
             result = json.loads(raw_data)
             if res.status != 200:
-                raise ValueError("Failed to retrieve the submission results")
+                conn.close()
+                raise result
 
             all_done = all(submission["status"]["id"] != 1 for submission in result["submissions"])
             if all_done:
+                conn.close()
                 return result
 
             time.sleep(poll_interval)
 
+        conn.close()
         raise TimeoutError("Submission results not ready after polling for a while")
+    
+    @staticmethod
+    def get_available_languages():
+
+        conn = http.client.HTTPSConnection(os.environ.get("API_HOST"), context=ssl.create_default_context(cafile=certifi.where()))
+
+        headers = {
+            'x-rapidapi-key': os.environ.get("API_KEY"),
+            'x-rapidapi-host': os.environ.get("API_HOST")
+        }
+
+        conn.request("GET", "/languages", headers=headers)
+        res = conn.getresponse()
+        data = res.read()
+
+        return data.decode("utf-8")

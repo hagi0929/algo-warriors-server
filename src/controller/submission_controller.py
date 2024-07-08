@@ -12,5 +12,8 @@ def submit_code():
     code = request.json.get('code')
     problem_id = request.json.get('problem_id')
     programming_language = request.json.get('programming_language')
-    res = SubmissionService.submit_code(code, problem_id, programming_language)
-    return res
+    return SubmissionService.submit_code(code, problem_id, programming_language)
+
+@submission_bp.route('/available_languages', methods=['GET'])
+def get_available_languages():
+    return SubmissionService.get_available_languages()

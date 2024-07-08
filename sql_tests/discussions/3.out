@@ -1,4 +1,4 @@
-discussion_id   parentdiscussion_id     problem_id  user_id     content     created_at  updated_at  
-1		1	1	This is the first discussion for problem 1	2024-06-20 18:57:06.729 -0400	2024-06-20 18:57:06.729 -0400
-2	1	1	1	This is a reply to the first discussion about problem 1.	2024-06-20 18:58:43.646 -0400	2024-06-20 18:58:43.646 -0400
-5	2	1	1	Another reply to the second discussion about problem 1	2024-06-20 19:05:02.297 -0400	2024-06-20 19:05:02.297 -0400
+discussion_id   parentdiscussion_id     problem_id  user_id     title       content     created_at  updated_at  
+1		1	1	This is the first discussion for problem 1	Problem 1 Discussion       2024-06-20 18:57:06.729 -0400	2024-06-20 18:57:06.729 -0400
+2	1	1	1	This is a reply to the first discussion about problem 1.	       2024-06-20 18:58:43.646 -0400	2024-06-20 18:58:43.646 -0400
+5	2	1	1	Another reply to the second discussion about problem 1	       2024-06-20 19:05:02.297 -0400	2024-06-20 19:05:02.297 -0400

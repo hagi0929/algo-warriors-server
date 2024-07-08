@@ -55,15 +55,20 @@ def insert_data():
 
     # Insert discussion data
     insert_discussion_query = """
-    INSERT INTO Discussion (problem_id, parentdiscussion_id, user_id, content, created_at, updated_at)
-    VALUES (%s, %s, %s, %s, %s, %s)
+    INSERT INTO Discussion (problem_id, parentdiscussion_id, user_id, title, content, created_at, updated_at)
+    VALUES (%s, %s, %s, %s, %s, %s, %s)
     """
     for discussion in discussions_data:
         try:
             cursor.execute(insert_discussion_query, (
                 discussion['problem_id'], discussion['parentdiscussion_id'], discussion['user_id'],
-                discussion['content'], discussion['created_at'], discussion['updated_at']))
+                discussion['title'], discussion['content'], discussion['created_at'], discussion['updated_at']))
+            connection.commit()  # Commit the transaction
         except psycopg2.errors.UniqueViolation:
+            connection.rollback()
+            continue
+        except psycopg2.Error as e:
+            print(f"An error occurred: {e}")
             connection.rollback()
             continue
 

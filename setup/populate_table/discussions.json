@@ -4,6 +4,7 @@
         "problem_id": 1,
         "parentdiscussion_id": null,
         "user_id": 1,
+        "title": "Problem 1 Discussion",
         "content": "This is the first discussion about problem 1.",
         "created_at": "2024-06-19T10:00:00Z",
         "updated_at": "2024-06-19T10:00:00Z"
@@ -13,6 +14,7 @@
         "problem_id": 1,
         "parentdiscussion_id": 1,
         "user_id": 1,
+        "title": null,
         "content": "This is a reply to the first discussion about problem 1.",
         "created_at": "2024-06-19T10:10:00Z",
         "updated_at": "2024-06-19T10:10:00Z"
@@ -22,6 +24,7 @@
         "problem_id": 2,
         "parentdiscussion_id": null,
         "user_id": 1,
+        "title": "Problem 2 Discussion",
         "content": "This is the first discussion about problem 2.",
         "created_at": "2024-06-19T11:00:00Z",
         "updated_at": "2024-06-19T11:00:00Z"
@@ -31,6 +34,7 @@
         "problem_id": 1,
         "parentdiscussion_id": 2,
         "user_id": 1,
+        "title": null,
         "content": "Another reply to the second discussion about problem 1.",
         "created_at": "2024-06-19T12:00:00Z",
         "updated_at": "2024-06-19T12:00:00Z"
@@ -40,6 +44,7 @@
         "problem_id": 3,
         "parentdiscussion_id": null,
         "user_id": 1,
+        "title": "Problem 3 Discussion",
         "content": "This is the first discussion about problem 3.",
         "created_at": "2024-06-19T13:00:00Z",
         "updated_at": "2024-06-19T13:00:00Z"

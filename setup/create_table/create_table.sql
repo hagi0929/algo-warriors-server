@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS Discussion (
     problem_id INT NOT NULL,
     parentdiscussion_id INT DEFAULT NULL,
     user_id INT NOT NULL,
+    title VARCHAR(500) DEFAULT NULL,
     content VARCHAR(500) NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),

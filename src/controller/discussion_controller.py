@@ -13,6 +13,7 @@ def create_discussion(problem_id):
             problem_id=problem_id,
             parentdiscussion_id=data['parentdiscussion_id'],
             user_id=data['user_id'],
+            title=data['title'],
             content=data['content']
         )
         print(discussion_request.problem_id, discussion_request.user_id, discussion_request.content)
@@ -22,6 +23,7 @@ def create_discussion(problem_id):
             'problem_id': discussion_request.problem_id,
             'parentdiscussion_id': discussion_request.parentdiscussion_id,
             'user_id': discussion_request.user_id,
+            'title': discussion_request.title,
             'content': discussion_request.content
         }
         return jsonify(response), 201

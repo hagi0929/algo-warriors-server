@@ -4,11 +4,12 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Discussion:
-    def __init__(self, discussion_id, parentdiscussion_id, problem_id, user_id, content, created_at, updated_at):
+    def __init__(self, discussion_id, parentdiscussion_id, problem_id, user_id, title, content, created_at, updated_at):
         self.discussion_id = discussion_id
         self.parentdiscussion_id = parentdiscussion_id
         self.problem_id = problem_id
         self.user_id = user_id
+        self.title = title
         self.content = content
         self.created_at = created_at
         self.updated_at = updated_at
@@ -20,6 +21,7 @@ class Discussion:
             'problem_id': self.problem_id,
             'parentdiscussion_id': self.parentdiscussion_id,
             'user_id': self.user_id,
+            'title': self.title,
             'content': self.content,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
@@ -30,10 +32,11 @@ class Discussion:
         self.updated_at = datetime.now()
 
 class DiscussionCreationRequest:
-    def __init__(self, parentdiscussion_id: Optional[int], problem_id: int, user_id: int, content: str):
+    def __init__(self, parentdiscussion_id: Optional[int], problem_id: int, user_id: int, title: Optional[str], content: str):
         self.problem_id: int = problem_id
         self.parentdiscussion_id: Optional[int] = parentdiscussion_id
         self.user_id: int = user_id
+        self.title: Optional[str] = title
         self.content: str = content
 
     def validate(self):
@@ -43,6 +46,8 @@ class DiscussionCreationRequest:
             raise ValueError("Parent discussion ID must be an integer or None")
         if not isinstance(self.user_id, int):
             raise ValueError("User ID must be an integer")
+        if not isinstance(self.title, (str, type(None))):
+            raise ValueError("Title must be a string or None")
         if not self.content or not isinstance(self.content, str):
             raise ValueError("Content is required and must be a string")
         if len(self.content) > 500:

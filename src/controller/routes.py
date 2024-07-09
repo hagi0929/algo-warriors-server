@@ -4,6 +4,7 @@ from .tag_controller import tag_bp
 from .user_controller import user_bp
 from src.controller.discussion_controller import discussion_bp
 from .contest_controller import contest_blueprint
+from .submission_controller import submission_bp
 from werkzeug.exceptions import HTTPException
 
 api_bp = Blueprint('api', __name__)
@@ -13,6 +14,7 @@ api_bp.register_blueprint(tag_bp, url_prefix="/tag")
 api_bp.register_blueprint(discussion_bp, url_prefix='/discussions')
 api_bp.register_blueprint(contest_blueprint, url_prefix="/contest")
 api_bp.register_blueprint(user_bp, url_prefix="/user")
+api.register_blueprint(submission_bp, url_prefix="/submission")
 
 @api_bp.errorhandler(HTTPException)
 def handle_error(error: HTTPException):

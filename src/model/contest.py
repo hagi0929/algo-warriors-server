@@ -1,6 +1,3 @@
-# Description: Model for contest
-# Author: Vidhi Ruparel
-from typing import List
 from datetime import datetime
 
 class Contest:

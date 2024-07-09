@@ -2,6 +2,7 @@ from typing import Optional
 from datetime import datetime
 from dataclasses import dataclass, field
 
+
 @dataclass
 class Discussion:
     def __init__(self, discussion_id, parentdiscussion_id, problem_id, user_id, title, content, created_at, updated_at):
@@ -14,7 +15,6 @@ class Discussion:
         self.created_at = created_at
         self.updated_at = updated_at
 
-
     def to_dict(self) -> dict:
         return {
             'discussion_id': self.discussion_id,
@@ -26,10 +26,11 @@ class Discussion:
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
         }
-    
+
     def update_content(self, new_content: str):
         self.content = new_content
         self.updated_at = datetime.now()
+
 
 class DiscussionCreationRequest:
     def __init__(self, parentdiscussion_id: Optional[int], problem_id: int, user_id: int, title: Optional[str], content: str):

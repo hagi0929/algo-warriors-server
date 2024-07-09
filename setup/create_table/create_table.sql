@@ -153,3 +153,4 @@ CREATE INDEX idx_tag_type_content ON Tag (type, content);
 CREATE INDEX idx_problem_tag_problem_id ON ProblemTag (problem_id);
 CREATE INDEX idx_problem_tag_tag_id ON ProblemTag (tag_id);
 CREATE INDEX idx_tag_tag_id ON Tag (tag_id);
+CREATE INDEX idx_discussion_problem_discussion ON Discussion (problem_id, discussion_id);

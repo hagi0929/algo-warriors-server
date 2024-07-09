@@ -17,8 +17,8 @@ class ContestService:
     
     # Create contest
     @staticmethod
-    def create_contest(contest: Contest) -> Contest:
-        return ContestRepos.create_contest(contest)
+    def create_contest(data) -> Contest:
+        return ContestRepos.create_contest(data)
     
     # Delete contest by id
     @staticmethod

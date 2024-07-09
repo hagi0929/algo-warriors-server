@@ -55,27 +55,37 @@ class ContestRepos:
     
     # Add new contest
     @staticmethod
-    def create_contest(contest: Contest) -> Contest:
+    def create_contest(data) -> Contest:
         query = text("""
             INSERT INTO contest (title, description, start_time, end_time, created_by)
             VALUES (:title, :description, :start_time, :end_time, :created_by)
             RETURNING contest_id, created_at
         """)
         result = db.session.execute(query, {
-            'title': contest.title,
-            'description': contest.description,
-            'start_time': contest.start_time,
-            'end_time': contest.end_time,
-            'created_by': contest.created_by,
+            'title': data['title'],
+            'description': data['description'],
+            'start_time': data['start_time'],
+            'end_time': data['end_time'],
+            'created_by': data['created_by'],
         })
-        contest_id = result.fetchone()[0]
-        created_at = result.fetchone()[1]
         
+        # Fetch the result once
+        row = result.fetchone()
+        contest_id = row[0]
+        created_at = row[1]
+
+        contest = Contest(
+            contest_id=contest_id,
+            title=data['title'],
+            description=data['description'],
+            start_time=data['start_time'],
+            end_time=data['end_time'],
+            created_by=data['created_by'],
+            created_at=created_at
+        )
         db.session.commit()
         
         # Return the contest object with the assigned contest_id
-        contest.contest_id = contest_id
-        contest.created_at = created_at
         return contest
     
     # Delete contest by id
@@ -121,9 +131,9 @@ class ContestRepos:
         result = db.session.execute(query, {'contest_id': contest_id})
         problems = [
             {
-                'problem_id': row['problem_id'],
-                'title': row['title'],
-                'description': row['description']
+                'problem_id': row[0],
+                'title': row[1],
+                'description': row[2]
             } for row in result
         ]
         return problems
@@ -140,8 +150,8 @@ class ContestRepos:
         result = db.session.execute(query, {'contest_id': contest_id})
         participants = [
             {
-                'user_id': row['user_id'],
-                'username': row['username']
+                'user_id': row[0],
+                'username': row[1]
             } for row in result
         ]
         return participants
@@ -153,19 +163,19 @@ class ContestRepos:
             SELECT c.contest_id, c.title, c.description, c.start_time, c.end_time, c.created_by, c.created_at, c.winner
             FROM Contest c
             JOIN ContestParticipant cp ON c.contest_id = cp.contest_id
-            WHERE cp.participant_id = :user_id AND c.start_time <= NOW() AND c.end_time >= NOW()
+            WHERE cp.participant_id = :user_id 
         """)
         result = db.session.execute(query, {'user_id': user_id})
         contests = [
             Contest(
-                contest_id=row['contest_id'],
-                title=row['title'],
-                description=row['description'],
-                start_time=row['start_time'],
-                end_time=row['end_time'],
-                created_by=row['created_by'],
-                created_at=row['created_at'],
-                winner=row['winner']
+                contest_id=row[0],
+                title=row[1],
+                description=row[2],
+                start_time=row[3],
+                end_time=row[4],
+                created_by=row[5],
+                created_at=row[6],
+                winner=row[7]
             ) for row in result
         ]
         return contests
@@ -199,14 +209,14 @@ class ContestRepos:
         result = db.session.execute(query, {'start_date': start_date, 'end_date': end_date})
         contests = [
             Contest(
-                contest_id=row['contest_id'],
-                title=row['title'],
-                description=row['description'],
-                start_time=row['start_time'],
-                end_time=row['end_time'],
-                created_by=row['created_by'],
-                created_at=row['created_at'],
-                winner=row['winner']
+                contest_id=row[0],
+                title=row[1],
+                description=row[2],
+                start_time=row[3],
+                end_time=row[4],
+                created_by=row[5],
+                created_at=row[6],
+                winner=row[7]
             ) for row in result
         ]
         return contests
@@ -238,10 +248,10 @@ class ContestRepos:
         result = db.session.execute(query, {'contest_id': contest_id, 'n': n})
         users = [
             {
-                'user_id': row['user_id'],
-                'username': row['username'],
-                'score': row['score'],
-                'last_submission': row['last_submission']
+                'user_id': row[0],
+                'username': row[1],
+                'score': row[2],
+                'last_submission': row[3]
             } for row in result
         ]
         return users
@@ -273,10 +283,10 @@ class ContestRepos:
         row = result.fetchone()
         if row:
             return {
-                'user_id': row['user_id'],
-                'username': row['username'],
-                'score': row['score'],
-                'rank': row['rank']
+                'user_id': row[0],
+                'username': row[1],
+                'score': row[2],
+                'rank': row[3]
             }
         return None
 

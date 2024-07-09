@@ -24,14 +24,7 @@ def get_contest_by_id(contest_id):
 @contest_blueprint.route('/contests', methods=['POST'])
 def create_contest():
     data = request.json
-    contest = Contest(
-        title=data['title'],
-        description=data['description'],
-        start_time=data['start_time'],
-        end_time=data['end_time'],
-        created_by=data['created_by']
-    )
-    created_contest = ContestService.create_contest(contest)
+    created_contest = ContestService.create_contest(data)
     return jsonify(created_contest.to_dict()), 201
 
 # Delete contest by id
@@ -63,7 +56,7 @@ def add_problem_to_contest(contest_id):
 @contest_blueprint.route('/contests/<int:contest_id>/problems', methods=['GET'])
 def get_contest_problems(contest_id):
     problems = ContestService.get_contest_problems(contest_id)
-    return jsonify([problem.to_dict() for problem in problems])
+    return jsonify(problems)
 
 # Get contest participants
 @contest_blueprint.route('/contests/<int:contest_id>/participants', methods=['GET'])
@@ -79,7 +72,7 @@ def get_contests_participating(user_id):
 
 # Submit contest problem
 @contest_blueprint.route('/contests/<int:contest_id>/submit', methods=['POST'])
-def submit_contest_problem():
+def submit_contest_problem(contest_id):
     data = request.json
     participant_id = data['participant_id']
     problem_id = data['problem_id']

@@ -4,27 +4,23 @@ from ..model.popup import DetailedPopupResource, SimplePopupResource
 from ..repos.popup_repos import PopupResourceRepository
 
 class PopupResourceService:
-    # Create popup resource
+    # Get all resources ordered by stars
     @staticmethod
-    def create_popup_resource(resource: DetailedPopupResource) -> DetailedPopupResource:
-        return PopupResourceRepository.create_popup_resource(resource)
+    def get_all_resources_ordered_by_stars():
+        return PopupResourceRepository.get_all_resources_ordered_by_stars()
     
-    # Get all popup resources
+    # Search resources by keyword
     @staticmethod
-    def get_all_popup_resources() -> list:
-        return PopupResourceRepository.get_all_popup_resources()
+    def search_resources_by_keyword(keyword):
+        return PopupResourceRepository.search_resources_by_keyword(keyword)
     
-    # Get popup resource by URL
+    # Get popularity data by language
     @staticmethod
-    def get_popup_resource_by_url(resource_url: str) -> SimplePopupResource:
-        return PopupResourceRepository.get_popup_resource_by_url(resource_url)
+    def get_popularity_by_language():
+        return PopupResourceRepository.get_popularity_by_language()
+        
+    # Refresh materialized view
+    @staticmethod
+    def refresh_materialized_view():
+        return PopupResourceRepository.refresh_materialized_view()
     
-    # Update popup resource by URL
-    @staticmethod
-    def update_popup_resource_by_url(resource_url: str, data: dict) -> DetailedPopupResource:
-        return PopupResourceRepository.update_popup_resource_by_url(resource_url, data)
-    
-    # Delete popup resource by URL
-    @staticmethod
-    def delete_popup_resource_by_url(resource_url: str) -> bool:
-        return PopupResourceRepository.delete_popup_resource_by_url(resource_url)

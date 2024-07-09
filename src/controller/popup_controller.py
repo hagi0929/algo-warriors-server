@@ -6,54 +6,39 @@ from src.model.popup import DetailedPopupResource, SimplePopupResource
 
 popup_resource_blueprint = Blueprint('popup_resources', __name__)
 
-# Add new popup resource
-@popup_resource_blueprint.route('/', methods=['POST'])
-def create_popup_resource():
-    data = request.json
-    resource = DetailedPopupResource(
-        resource_id=None,
-        resource_name=data['resource_name'],
-        resource_description=data['resource_description'],
-        resource_url=data['resource_url'],
-        homepage=data['homepage'],
-        size=data['size'],
-        stars=data['stars'],
-        forks=data['forks'],
-        issues=data['issues']
-    )
-    created_resource = PopupResourceService.create_popup_resource(resource)
-    return jsonify(created_resource.to_dict()), 201
-
-# Get all popup resources
+# Endpoint to get all resources ordered by stars
 @popup_resource_blueprint.route('/', methods=['GET'])
-def get_all_popup_resources():
-    resources = PopupResourceService.get_all_popup_resources()
-    return jsonify([resource.to_simple_dict() for resource in resources]), 200
+def get_all_resources_ordered_by_stars():
+    try:
+        resources = PopupResourceService.get_all_resources_ordered_by_stars()
+        return jsonify([resource.to_simple_dict() for resource in resources]), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+# Endpoint to search resources by keyword
+@popup_resource_blueprint.route('/search', methods=['GET'])
+def search_resources_by_keyword():
+    keyword = request.args.get('keyword')
+    try:
+        resources = PopupResourceService.search_resources_by_keyword(keyword)
+        return jsonify([resource.to_simple_dict() for resource in resources]), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+# Endpoint to get popularity data by language
+@popup_resource_blueprint.route('/popularity-by-language', methods=['GET'])
+def get_popularity_by_language():
+    try:
+        popularity_data = PopupResourceService.get_popularity_by_language()
+        return jsonify({'popularity_by_language': popularity_data}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500    
 
-# Get popup resource by URL
-@popup_resource_blueprint.route('/<string:resource_url>', methods=['GET'])
-def get_popup_resource_by_url(resource_url):
-    resource = PopupResourceService.get_popup_resource_by_url(resource_url)
-    if resource:
-        return jsonify(resource.to_dict()), 200
-    else:
-        return jsonify({'error': 'Resource not found'}), 404
-
-# Update popup resource by URL
-@popup_resource_blueprint.route('/<string:resource_url>', methods=['PUT'])
-def update_popup_resource_by_url(resource_url):
-    data = request.json
-    updated_resource = PopupResourceService.update_popup_resource_by_url(resource_url, data)
-    if updated_resource:
-        return jsonify(updated_resource.to_dict()), 200
-    else:
-        return jsonify({'error': 'Resource not found'}), 404
-
-# Delete popup resource by URL
-@popup_resource_blueprint.route('/<string:resource_url>', methods=['DELETE'])
-def delete_popup_resource_by_url(resource_url):
-    success = PopupResourceService.delete_popup_resource_by_url(resource_url)
-    if success:
+# Endpoint to refresh materialized view
+@popup_resource_blueprint.route('/refresh-view', methods=['POST'])
+def refresh_materialized_view():
+    try:
+        PopupResourceService.refresh_materialized_view()
         return '', 204
-    else:
-        return jsonify({'error': 'Resource not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

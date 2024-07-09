@@ -128,11 +128,25 @@ CREATE TABLE PopupResource (
     resource_url VARCHAR(255) NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    homepage VARCHAR(255),
+    homepage TEXT,
     size INT,
     stars INT,
     forks INT,
-    issues INT
+    issues INT,
+    watchers INT,
+    resource_language VARCHAR(255),
+    license VARCHAR(255),
+    topics TEXT,
+    has_issues BOOLEAN,
+    has_projects BOOLEAN,
+    has_downloads BOOLEAN,
+    has_wiki BOOLEAN,
+    has_pages BOOLEAN,
+    has_discussions BOOLEAN,
+    is_fork BOOLEAN,
+    is_archived BOOLEAN,
+    is_template BOOLEAN,
+    default_branch VARCHAR(255)
 );
 
 CREATE MATERIALIZED VIEW PopupResourcesView AS
@@ -141,5 +155,8 @@ SELECT
     resource_name, 
     resource_description, 
     resource_url, 
-    homepage
+    homepage,
+    stars,
+    resource_language,
+    topics
 FROM PopupResource;

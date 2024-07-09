@@ -5,6 +5,71 @@ from .. import db
 from ..model.popup import DetailedPopupResource, SimplePopupResource
 
 class PopupResourceRepository:
+    # Get all resources ordered by stars
+    @staticmethod
+    def get_all_resources_ordered_by_stars():
+        query = text('''
+            SELECT *
+            FROM PopupResourcesView
+            ORDER BY stars DESC;
+        ''')
+        result = db.session.execute(query)
+        return [SimplePopupResource(
+            resource_id=row[0],
+            resource_name=row[1],
+            resource_description=row[2],
+            resource_url=row[3],
+            homepage=row[4],
+            stars=row[5],
+            resource_language=row[6],
+            topics=row[7]
+        ) for row in result]
+    
+    # Search resources by keyword
+    @staticmethod
+    def search_resources_by_keyword(keyword):
+        query = text('''
+            SELECT *
+            FROM PopupResourcesView
+            WHERE resource_name ILIKE :keyword
+               OR topics ILIKE :keyword
+            ORDER BY stars DESC;
+        ''')
+        processed_keyword = keyword.replace(' ', '-')
+        result = db.session.execute(query, {'keyword': f'%{processed_keyword}%'})
+        return [SimplePopupResource(
+            resource_id=row[0],
+            resource_name=row[1],
+            resource_description=row[2],
+            resource_url=row[3],
+            homepage=row[4],
+            stars=row[5],
+            resource_language=row[6],
+            topics=row[7]
+        ) for row in result]
+    
+    # Get popularity data by language
+    @staticmethod
+    def get_popularity_by_language():
+        query = text('''
+            SELECT resource_language AS language,
+                   AVG(stars) AS avg_stars,
+                   COUNT(*) AS resource_count
+            FROM PopupResourcesView
+            WHERE resource_language IS NOT NULL
+            GROUP BY resource_language
+            ORDER BY avg_stars DESC;
+        ''')
+        result = db.session.execute(query)
+        popularity_data = []
+        for row in result:
+            popularity_data.append({
+                'language': row[0],
+                'avg_stars': row[1],
+                'resource_count': row[2]
+            })
+        return popularity_data
+    
     # Refresh materialized view
     @staticmethod
     def refresh_materialized_view():
@@ -12,110 +77,3 @@ class PopupResourceRepository:
         db.session.execute(query)
         db.session.commit()
     
-    # Create popup resource
-    @staticmethod
-    def create_popup_resource(resource: DetailedPopupResource) -> DetailedPopupResource:
-        query = text("""
-            INSERT INTO PopupResource (resource_name, resource_description, resource_url, homepage, size, stars, forks, issues)
-            VALUES (:resource_name, :resource_description, :resource_url, :homepage, :size, :stars, :forks, :issues)
-            RETURNING resource_id
-        """)
-        result = db.session.execute(query, {
-            'resource_name': resource.resource_name,
-            'resource_description': resource.resource_description,
-            'resource_url': resource.resource_url,
-            'homepage': resource.homepage,
-            'size': resource.size,
-            'stars': resource.stars,
-            'forks': resource.forks,
-            'issues': resource.issues
-        })
-        resource_id = result.fetchone()[0]
-        db.session.commit()
-        PopupResourceRepository.refresh_materialized_view()
-        resource.resource_id = resource_id
-        return resource
-    
-    # Get all popup resources
-    @staticmethod
-    def get_all_popup_resources() -> list:
-        query = text("SELECT * FROM PopupResourcesView")
-        result = db.session.execute(query)
-        rows = result.fetchall()
-        resources = [SimplePopupResource(
-            resource_id=row['resource_id'],
-            resource_name=row['resource_name'],
-            resource_description=row['resource_description'],
-            resource_url=row['resource_url'],
-            homepage=row['homepage']
-        ) for row in rows]
-        return resources
-    
-    # Get popup resource by URL
-    @staticmethod
-    def get_popup_resource_by_url(resource_url: str) -> SimplePopupResource:
-        query = text("SELECT * FROM PopupResourcesView WHERE resource_url = :resource_url")
-        result = db.session.execute(query, {'resource_url': resource_url})
-        row = result.fetchone()
-        if row:
-            return SimplePopupResource(
-                resource_id=row['resource_id'],
-                resource_name=row['resource_name'],
-                resource_description=row['resource_description'],
-                resource_url=row['resource_url'],
-                homepage=row['homepage']
-            )
-        return None
-    
-    # Update popup resource by URL
-    @staticmethod
-    def update_popup_resource_by_url(resource_url: str, data: dict) -> DetailedPopupResource:
-        query = text("""
-            UPDATE PopupResource
-            SET resource_name = :resource_name,
-                resource_description = :resource_description,
-                resource_url = :resource_url,
-                homepage = :homepage,
-                size = :size,
-                stars = :stars,
-                forks = :forks,
-                issues = :issues
-            WHERE resource_url = :original_resource_url
-            RETURNING resource_id, resource_name, resource_description, resource_url, homepage, size, stars, forks, issues
-        """)
-        result = db.session.execute(query, {
-            'resource_name': data.get('resource_name'),
-            'resource_description': data.get('resource_description'),
-            'resource_url': data.get('resource_url'),
-            'homepage': data.get('homepage'),
-            'size': data.get('size'),
-            'stars': data.get('stars'),
-            'forks': data.get('forks'),
-            'issues': data.get('issues'),
-            'original_resource_url': resource_url
-        })
-        db.session.commit()
-        PopupResourceRepository.refresh_materialized_view()
-        row = result.fetchone()
-        if row:
-            return DetailedPopupResource(
-                resource_id=row['resource_id'],
-                resource_name=row['resource_name'],
-                resource_description=row['resource_description'],
-                resource_url=row['resource_url'],
-                homepage=row['homepage'],
-                size=row['size'],
-                stars=row['stars'],
-                forks=row['forks'],
-                issues=row['issues']
-            )
-        return None
-    
-    # Delete popup resource by URL
-    @staticmethod
-    def delete_popup_resource_by_url(resource_url: str) -> bool:
-        query = text("DELETE FROM PopupResource WHERE resource_url = :resource_url")
-        result = db.session.execute(query, {'resource_url': resource_url})
-        db.session.commit()
-        PopupResourceRepository.refresh_materialized_view()
-        return result.rowcount > 0

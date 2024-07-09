@@ -1,6 +1,7 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import Flask, jsonify, request
 from ..service.discussion_service import DiscussionService
 from ..model.discussion import DiscussionCreationRequest
+from flask_smorest import Blueprint
 
 discussion_bp = Blueprint("discussions", __name__)
 

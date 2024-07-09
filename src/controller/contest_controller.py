@@ -1,8 +1,9 @@
 # Description: Controller for contest related operations
 # Author: Vidhi Ruparel
-from flask import Blueprint, request, jsonify, abort
+from flask import request, jsonify, abort
 from src.service.contest_service import ContestService
 from src.model.contest import Contest
+from flask_smorest import Blueprint
 
 contest_blueprint = Blueprint('contest', __name__)
 

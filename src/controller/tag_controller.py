@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify, request
-
+from flask import jsonify, request
+from flask_smorest import Blueprint
 from src.model.tag import Tag
 from src.service.tag_service import TagService
 

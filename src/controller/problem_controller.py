@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify, request
-
+from flask import jsonify, request
+from flask_smorest import Blueprint
 from src.middleware.middleware import require_auth
 from src.model.problem import ProblemCreationRequest
 from src.service.problem_service import ProblemService

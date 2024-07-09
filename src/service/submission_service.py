@@ -53,7 +53,7 @@ class SubmissionService:
                     conn.close()
                     raise Exception(f"Error fetching results: {result}")
 
-                all_done = all(submission["status"]["id"] != 1 for submission in result["submissions"])
+                all_done = all((submission["status"]["id"] != 1 and submission["status"]["id"]!= 2) for submission in result["submissions"])
                 if all_done:
                     return result["submissions"]
 

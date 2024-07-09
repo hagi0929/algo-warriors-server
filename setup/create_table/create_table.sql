@@ -112,3 +112,8 @@ CREATE TABLE IF NOT EXISTS ContestProblemSubmission (
     FOREIGN KEY (problem_id) REFERENCES Problem(problem_id),
     FOREIGN KEY (participant_id) REFERENCES ServiceUser(user_id)
 );
+
+CREATE INDEX idx_tag_type_content ON Tag (type, content);
+CREATE INDEX idx_problem_tag_problem_id ON ProblemTag (problem_id);
+CREATE INDEX idx_problem_tag_tag_id ON ProblemTag (tag_id);
+CREATE INDEX idx_tag_tag_id ON Tag (tag_id);

@@ -99,7 +99,7 @@
 4. Contests: Users can participate in time-bound contests and view rankings based on their scores.
 5. User Roles and Permissions: Manage user access and permissions using roles.
 6. Popup Resources: Users can access a curated list of valuable programming resources.
-Each feature belongs in its own model, controller, service and repository.
+- Each feature belongs in its own model, controller, service and repository.
 
 
 # Production Dataset

@@ -15,11 +15,11 @@ def insert_data():
     discussions_data = read_json_file('discussions.json')
 
     db_params = {
-        'dbname': '',
-        'user': '',
-        'password': '',
-        'host': '',
-        'port': ''
+        'dbname': 'cs348proj',
+        'user': 'cs348',
+        'password': 'cs348',
+        'host': '132.145.98.138',
+        'port': '5432'
     }
 
     print("Attempting to connect to the database...")

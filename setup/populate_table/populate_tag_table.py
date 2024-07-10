@@ -3,26 +3,20 @@ import psycopg2
 from dotenv import dotenv_values
 
 # Load environment variables from .env file
-env_vars = dotenv_values('.env')
 
 # Function to connect to PostgreSQL database
 def connect_db():
     conn_params = {
-        'dbname': '',
-        'user': '',
-        'password': '',
-        'host': '',
-        'port': ''
+        'dbname': 'cs348proj',
+        'user': 'cs348',
+        'password': 'cs348',
+        'host': '132.145.98.138',
+        'port': '5432'
     }
-    try:
-        print("Attempting to connect to the database...")
-        connection = psycopg2.connect(**conn_params)
-        print("Connection established.")
-        return connection
-    except Exception as e:
-        print(f"Error connecting to database: {e}")
-        return None
-
+    print("Attempting to connect to the database...")
+    connection = psycopg2.connect(**conn_params)
+    print("Connection established.")
+    return connection
 # Function to execute SQL queries and return results
 def execute_query(conn, query, params=()):
     cursor = conn.cursor()
@@ -83,7 +77,7 @@ def process_problems_file(json_file, conn):
 
 # Example usage
 if __name__ == "__main__":
-    problems_json_file = 'setup/populate_table/problems.json'
+    problems_json_file = 'problems.json'
     
     # Connect to PostgreSQL database
     connection = connect_db()

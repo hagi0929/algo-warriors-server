@@ -11,7 +11,7 @@ WITH RECURSIVE subthreads AS (
     FROM 
         Discussion
     WHERE 
-        discussion_id = 1;
+        discussion_id = 1
     UNION ALL
     SELECT 
         d.discussion_id, 

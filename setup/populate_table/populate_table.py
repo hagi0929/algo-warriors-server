@@ -39,7 +39,7 @@ def insert_data():
             problem['problem_id'], problem['title'], problem['description'], user_id))
             problem_id = cursor.fetchone()[0]
 
-            # Insert test cases for the problem
+            
             insert_test_case_query = """
             INSERT INTO TestCase (problem_id, is_public, input, output)
             VALUES (%s, %s, %s, %s)
@@ -53,7 +53,7 @@ def insert_data():
             cursor = connection.cursor()
             continue
 
-    # Insert discussion data
+    
     insert_discussion_query = """
     INSERT INTO Discussion (problem_id, parentdiscussion_id, user_id, title, content, created_at, updated_at)
     VALUES (%s, %s, %s, %s, %s, %s, %s)
@@ -63,7 +63,7 @@ def insert_data():
             cursor.execute(insert_discussion_query, (
                 discussion['problem_id'], discussion['parentdiscussion_id'], discussion['user_id'],
                 discussion['title'], discussion['content'], discussion['created_at'], discussion['updated_at']))
-            connection.commit()  # Commit the transaction
+            connection.commit()  
         except psycopg2.errors.UniqueViolation:
             connection.rollback()
             continue
@@ -72,7 +72,7 @@ def insert_data():
             connection.rollback()
             continue
 
-    # Check data before committing
+    
     cursor.execute("SELECT * FROM ServiceUser")
     service_user_rows = cursor.fetchall()
     print("\nServiceUser Table:")

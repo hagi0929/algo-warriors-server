@@ -41,7 +41,7 @@ class SubmissionService:
                 'Content-Type': "application/json"
             }
 
-            poll_interval = 3  # seconds
+            poll_interval = 3  
             max_attempts = 10
 
             for attempt in range(max_attempts):
@@ -64,7 +64,7 @@ class SubmissionService:
 
         conn = http.client.HTTPSConnection(os.environ.get("API_HOST"), context=ssl.create_default_context(cafile=certifi.where()))
 
-        # Step 1: Submit the code in batches
+        
         tokens = []
         for i in range(0, len(testcases), 20):
             batch = testcases[i:i + 20]
@@ -76,7 +76,7 @@ class SubmissionService:
             } for testcase in batch]
             tokens.extend(submit_batch(submissions))
 
-        # Step 2: Get the results of the submission in batches
+        
         results = []
         for i in range(0, len(tokens), 20):
             batch_tokens = tokens[i:i + 20]

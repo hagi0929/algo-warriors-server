@@ -1,5 +1,5 @@
-# Description: Model for Popup Resource
-# Author: Vidhi Ruparel
+
+
 class SimplePopupResource:
     def __init__(self, resource_id: int, resource_name: str, resource_description: str, resource_url: str, homepage: str, stars: int, resource_language: str, topics: str):
         self.resource_id = resource_id

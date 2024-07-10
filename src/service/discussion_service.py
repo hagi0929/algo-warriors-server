@@ -1,4 +1,3 @@
-from typing import Optional
 from ..model.discussion import DiscussionCreationRequest
 from ..repos.discussion_repos import DiscussionRepos
 

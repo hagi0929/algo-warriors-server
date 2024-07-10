@@ -1,12 +1,12 @@
-# Repository for Contest model
-# Author: Vidhi Ruparel
+
+
 from sqlalchemy.sql import text
 from .. import db
 from ..model.contest import Contest
 from typing import List, Optional
 
 class ContestRepos:
-    # Get all contests
+    
     @staticmethod
     def get_all_contests() -> List[Contest]:
         query = text("""
@@ -28,7 +28,7 @@ class ContestRepos:
             contests.append(contest)        
         return contests
     
-    # Get contest by id
+    
     @staticmethod
     def get_contest_by_id(contest_id: int) -> Optional[Contest]:
         query = text("""
@@ -53,7 +53,7 @@ class ContestRepos:
         )
         return contest
     
-    # Add new contest
+    
     @staticmethod
     def create_contest(data) -> Contest:
         query = text("""
@@ -69,7 +69,7 @@ class ContestRepos:
             'created_by': data['created_by'],
         })
         
-        # Fetch the result once
+        
         row = result.fetchone()
         contest_id = row[0]
         created_at = row[1]
@@ -85,10 +85,10 @@ class ContestRepos:
         )
         db.session.commit()
         
-        # Return the contest object with the assigned contest_id
+        
         return contest
     
-    # Delete contest by id
+    
     @staticmethod
     def delete_contest(contest_id: int) -> None:
         query = text("""
@@ -99,7 +99,7 @@ class ContestRepos:
         db.session.execute(query, parameters)
         db.session.commit()
 
-    # Register user to contest
+    
     @staticmethod
     def register_user_to_contest(contest_id: int, user_id: int) -> None:
         query = text("""
@@ -109,7 +109,7 @@ class ContestRepos:
         db.session.execute(query, {'contest_id': contest_id, 'user_id': user_id})
         db.session.commit()
     
-    # Add problem to contest
+    
     @staticmethod
     def add_problem_to_contest(contest_id: int, problem_id: int) -> None:
         query = text("""
@@ -119,7 +119,7 @@ class ContestRepos:
         db.session.execute(query, {'problem_id': problem_id, 'contest_id': contest_id})
         db.session.commit()
 
-    # Get contest problems
+    
     @staticmethod
     def get_contest_problems(contest_id: int) -> List[dict]:
         query = text("""
@@ -138,7 +138,7 @@ class ContestRepos:
         ]
         return problems
     
-    # Get contest participants
+    
     @staticmethod
     def get_contest_participants(contest_id: int) -> List[dict]:
         query = text("""
@@ -156,7 +156,7 @@ class ContestRepos:
         ]
         return participants
     
-    # Get contests the user is participating in
+    
     @staticmethod
     def get_contests_participating(user_id: int) -> List[Contest]:
         query = text("""
@@ -180,7 +180,7 @@ class ContestRepos:
         ]
         return contests
 
-    # Submit contest problem
+    
     @staticmethod
     def submit_contest_problem(participant_id: int, problem_id: int, submission: str) -> int:
         query = text("""
@@ -197,7 +197,7 @@ class ContestRepos:
         db.session.commit()
         return submission_id
 
-    # Get contest within a time range
+    
     @staticmethod
     def get_contests_within_date_range(start_date: str, end_date: str) -> List[Contest]:
         query = text("""
@@ -221,7 +221,7 @@ class ContestRepos:
         ]
         return contests
     
-    # Get users participating in a contest ranked by highest score and earliest submission time
+    
     @staticmethod
     def get_contest_participants_ranked(contest_id: int, n: int) -> List[dict]:
         query = text("""
@@ -256,7 +256,7 @@ class ContestRepos:
         ]
         return users
     
-    # Get user's score and rank in a contest
+    
     @staticmethod
     def get_user_score_and_rank(contest_id: int, user_id: int) -> Optional[dict]:
         query = text("""
@@ -290,10 +290,10 @@ class ContestRepos:
             }
         return None
 
-    # Declare contest winner
+    
     @staticmethod
     def declare_winner(contest_id: int) -> None:
-        # Get the top scorer (limit to 1)
+        
         top_scorer = ContestRepos.get_contest_participants_ranked(contest_id, n=1)
         
         if not top_scorer:

@@ -2,11 +2,11 @@ import json
 import random
 from datetime import datetime, timedelta
 
-# Function to generate random datetime in ISO format
+
 def generate_random_datetime(start, end):
     return (start + timedelta(seconds=random.randint(0, int((end - start).total_seconds())))).isoformat()
 
-# Initialize the parameters
+
 num_problems = 165
 num_discussions = 400
 num_users = 300
@@ -14,7 +14,7 @@ start_date = datetime(2024, 6, 19, 10, 0, 0)
 end_date = datetime(2024, 6, 30, 10, 0, 0)
 lorem_ipsum = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere, voluptates alias incidunt nihil labore praesentium quod sed quo voluptatibus, eaque laudantium amet reprehenderit asperiores aspernatur perspiciatis quis! Nisi, maxime harum."
 
-# Generate discussions
+
 discussions = []
 for i in range(num_discussions):
     discussion_id = i + 1
@@ -41,7 +41,7 @@ for i in range(num_discussions):
     }
     discussions.append(discussion)
 
-# Write to a JSON file
+
 with open('discussions.json', 'w') as f:
     json.dump(discussions, f, indent=4)
 

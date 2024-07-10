@@ -9,14 +9,14 @@ from .submission_controller import submission_bp
 from werkzeug.exceptions import HTTPException
 
 api_bp = Blueprint('api', __name__)
-
 api_bp.register_blueprint(problem_bp, url_prefix="/problem")
 api_bp.register_blueprint(tag_bp, url_prefix="/tag")
 api_bp.register_blueprint(discussion_bp, url_prefix='/discussions')
 api_bp.register_blueprint(contest_blueprint, url_prefix="/contest")
-api.register_blueprint(popup_resource_blueprint, url_prefix="/popup-resources")
+api_bp.register_blueprint(popup_resource_blueprint, url_prefix="/popup-resources")
 api_bp.register_blueprint(user_bp, url_prefix="/user")
-api.register_blueprint(submission_bp, url_prefix="/submission")
+api_bp.register_blueprint(submission_bp, url_prefix="/submission")
+
 
 @api_bp.errorhandler(HTTPException)
 def handle_error(error: HTTPException):

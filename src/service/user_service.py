@@ -1,7 +1,4 @@
 from flask_jwt_extended import create_access_token
-
-from ..model.tag import Tag
-from ..model.problem import ProblemDetailed
 from ..repos.redis_repos import RedisRepos
 from ..repos.user_repos import UserRepos
 from ..utils.auth import check_password

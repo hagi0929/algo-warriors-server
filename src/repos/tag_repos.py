@@ -139,7 +139,7 @@ class TagRepos:
         return problems
 
     
-     # Recommend at most 5 problems with same tag and difficulty
+     
     @staticmethod
     def recommend_problems(problem_id) -> list[ProblemDetailed]:
         query = text("""

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import jsonify, request
 from ..service.discussion_service import DiscussionService
 from ..model.discussion import DiscussionCreationRequest
 from flask_smorest import Blueprint

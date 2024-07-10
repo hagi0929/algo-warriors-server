@@ -22,7 +22,7 @@ class ProblemService:
         return new_problem_id
 
     @staticmethod
-    # TODO after completing user feature: implement submit code
+    
     def submit_code(problem_id, code):
         pass
 

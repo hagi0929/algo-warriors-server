@@ -1,5 +1,3 @@
-# Description: Model for contest
-# Author: Vidhi Ruparel
 class Contest:
     def __init__(self, contest_id: int, title: str, description: str, start_time: str, end_time: str, created_by: int, 
              created_at: str, winner: int = None):

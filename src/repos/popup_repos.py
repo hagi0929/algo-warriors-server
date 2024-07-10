@@ -1,11 +1,10 @@
-# Repository for Popup Resource model
-# Author: Vidhi Ruparel
 from sqlalchemy.sql import text
 from .. import db
 from ..model.popup import DetailedPopupResource, SimplePopupResource
 
+
 class PopupResourceRepository:
-    # Get all resources ordered by stars
+    
     @staticmethod
     def get_all_resources_ordered_by_stars():
         query = text('''
@@ -24,8 +23,8 @@ class PopupResourceRepository:
             resource_language=row[6],
             topics=row[7]
         ) for row in result]
+
     
-    # Search resources by keyword
     @staticmethod
     def search_resources_by_keyword(keyword):
         query = text('''
@@ -47,8 +46,8 @@ class PopupResourceRepository:
             resource_language=row[6],
             topics=row[7]
         ) for row in result]
+
     
-    # Get popularity data by language
     @staticmethod
     def get_popularity_by_language():
         query = text('''
@@ -69,11 +68,10 @@ class PopupResourceRepository:
                 'resource_count': row[2]
             })
         return popularity_data
+
     
-    # Refresh materialized view
     @staticmethod
     def refresh_materialized_view():
         query = text("REFRESH MATERIALIZED VIEW PopupResourcesView")
         db.session.execute(query)
         db.session.commit()
-    

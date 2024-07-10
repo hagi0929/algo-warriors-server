@@ -18,10 +18,10 @@ class ProblemRepos:
                 title=row[1],
             ))
 
-        # TODO add tags
-        # query = text("""
-        # SELECT problem_id, title, difficulty FROM Problem
-        # """)
+        
+        
+        
+        
         return problems
 
     @staticmethod

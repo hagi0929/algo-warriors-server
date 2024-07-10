@@ -3,6 +3,7 @@ from .. import db
 from ..model.tag import Tag
 from ..model.problem import ProblemDetailed
 
+
 class TagRepos:
     @staticmethod
     def get_tag_list() -> list[Tag]:
@@ -61,7 +62,7 @@ class TagRepos:
         result = db.session.execute(query, {'tid': tag_id})
         db.session.commit()
         return result.rowcount > 0
-    
+
     @staticmethod
     def find_problems_by_tag(tag_type: str, tag_content: str) -> list[ProblemDetailed]:
         query = text("""
@@ -96,9 +97,10 @@ class TagRepos:
         return problems_with_tags
 
     @staticmethod
-    def find_problems_with_multiple_tags(difficulty_tags: list[str], subcategory_tags: list[str], source_tags: list[str]) -> list[ProblemDetailed]:
+    def find_problems_with_multiple_tags(difficulty_tags: list[str], subcategory_tags: list[str],
+                                         source_tags: list[str]) -> list[ProblemDetailed]:
         query = text(
-        """
+            """
         WITH temp AS (
             SELECT P.problem_id, P.title, P.created_by, P.created_at
             FROM Problem P
@@ -121,25 +123,23 @@ class TagRepos:
         JOIN Tag T ON PT.tag_id = T.tag_id
         WHERE T.type = 'source' AND (T.content IN :source_tags OR :source_tags_is_empty = 1)
         """)
-        
+
         difficulty_tags_is_empty = 1 if not difficulty_tags else 0
         subcategory_tags_is_empty = 1 if not subcategory_tags else 0
         source_tags_is_empty = 1 if not source_tags else 0
-        
+
         result = db.session.execute(query, {
-            'difficulty_tags': difficulty_tags, 
-            'subcategory_tags': subcategory_tags, 
+            'difficulty_tags': difficulty_tags,
+            'subcategory_tags': subcategory_tags,
             'source_tags': source_tags,
             'difficulty_tags_is_empty': difficulty_tags_is_empty,
             'subcategory_tags_is_empty': subcategory_tags_is_empty,
             'source_tags_is_empty': source_tags_is_empty
         })
-        
+
         problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]
         return problems
 
-    
-     
     @staticmethod
     def recommend_problems(problem_id) -> list[ProblemDetailed]:
         query = text("""
@@ -169,16 +169,16 @@ class TagRepos:
         result = db.session.execute(query, {'pid': problem_id})
         problems = [ProblemDetailed(row[0], row[1], row[2], row[3], row[4]) for row in result]
         return problems
-    
+
     @staticmethod
-    def add_tag_to_problem(problem_id: str, tag_id:str):
+    def add_tag_to_problem(problem_id: str, tag_id: str):
         query = text("""
         INSERT INTO ProblemTag (problem_id, tag_id)
         VALUES (:problem_id, :tag_id)
         """)
         db.session.execute(query, {'problem_id': problem_id, 'tag_id': tag_id})
         db.session.commit()
-    
+
     @staticmethod
     def get_tags_of_problem(problem_id) -> list[Tag]:
         query = text("""

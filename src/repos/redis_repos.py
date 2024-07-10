@@ -1,7 +1,5 @@
-from typing import List
-
 from src import redis_db, db
-from .user_repos import UserRepos
+
 
 class RedisRepos:
 

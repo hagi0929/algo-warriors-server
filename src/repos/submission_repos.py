@@ -1,6 +1,7 @@
 from sqlalchemy.sql import text
 from .. import db
 
+
 class SubmissionRepos:
     @staticmethod
     def get_input_output(problem_id: int):
@@ -10,7 +11,7 @@ class SubmissionRepos:
         """)
         parameters = {'pid': problem_id}
         result = db.session.execute(query, parameters)
-        raw_results= result.fetchall()
+        raw_results = result.fetchall()
         results = []
         for row in raw_results:
             results.append({

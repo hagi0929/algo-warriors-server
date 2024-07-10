@@ -6,6 +6,7 @@ import http.client
 import ssl
 import certifi
 
+
 class SubmissionService:
     @staticmethod
     def submit_code(code, problem_id: int, programming_language: int):
@@ -24,11 +25,11 @@ class SubmissionService:
             res = conn.getresponse()
             raw_data = res.read()
             data = json.loads(raw_data)
-            
+
             if res.status != 201:
                 conn.close()
                 raise Exception(f"Error submitting batch: {data}")
-            
+
             return [val["token"] for val in data]
 
         def get_results(tokens):
@@ -41,11 +42,12 @@ class SubmissionService:
                 'Content-Type': "application/json"
             }
 
-            poll_interval = 3  
+            poll_interval = 3
             max_attempts = 10
 
             for attempt in range(max_attempts):
-                conn.request("GET", f"/submissions/batch?tokens={tokens_param}&base64_encoded=false&fields=*", headers=headers)
+                conn.request("GET", f"/submissions/batch?tokens={tokens_param}&base64_encoded=false&fields=*",
+                             headers=headers)
                 res = conn.getresponse()
                 raw_data = res.read()
                 result = json.loads(raw_data)
@@ -53,7 +55,8 @@ class SubmissionService:
                     conn.close()
                     raise Exception(f"Error fetching results: {result}")
 
-                all_done = all((submission["status"]["id"] != 1 and submission["status"]["id"]!= 2) for submission in result["submissions"])
+                all_done = all((submission["status"]["id"] != 1 and submission["status"]["id"] != 2) for submission in
+                               result["submissions"])
                 if all_done:
                     return result["submissions"]
 
@@ -62,9 +65,9 @@ class SubmissionService:
             conn.close()
             raise TimeoutError("Submission results not ready after polling for a while")
 
-        conn = http.client.HTTPSConnection(os.environ.get("API_HOST"), context=ssl.create_default_context(cafile=certifi.where()))
+        conn = http.client.HTTPSConnection(os.environ.get("API_HOST"),
+                                           context=ssl.create_default_context(cafile=certifi.where()))
 
-        
         tokens = []
         for i in range(0, len(testcases), 20):
             batch = testcases[i:i + 20]
@@ -76,7 +79,6 @@ class SubmissionService:
             } for testcase in batch]
             tokens.extend(submit_batch(submissions))
 
-        
         results = []
         for i in range(0, len(tokens), 20):
             batch_tokens = tokens[i:i + 20]
@@ -84,11 +86,12 @@ class SubmissionService:
 
         conn.close()
         return results
-    
+
     @staticmethod
     def get_available_languages():
 
-        conn = http.client.HTTPSConnection(os.environ.get("API_HOST"), context=ssl.create_default_context(cafile=certifi.where()))
+        conn = http.client.HTTPSConnection(os.environ.get("API_HOST"),
+                                           context=ssl.create_default_context(cafile=certifi.where()))
 
         headers = {
             'x-rapidapi-key': os.environ.get("API_KEY"),

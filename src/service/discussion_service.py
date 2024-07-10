@@ -1,6 +1,7 @@
 from ..model.discussion import DiscussionCreationRequest
 from ..repos.discussion_repos import DiscussionRepos
 
+
 class DiscussionService:
     @staticmethod
     def get_discussion_list_by_problem(problem_id: int):
@@ -9,7 +10,7 @@ class DiscussionService:
     @staticmethod
     def get_discussion_by_id(discussion_id: int):
         return DiscussionRepos.get_discussion_by_id(discussion_id)
-    
+
     @staticmethod
     def get_discussions_by_parent_id(parentdiscussion_id: int):
         return DiscussionRepos.get_discussions_by_parent_id(parentdiscussion_id)

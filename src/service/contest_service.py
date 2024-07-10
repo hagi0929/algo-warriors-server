@@ -1,5 +1,4 @@
 
-
 from typing import List, Optional
 from ..model.contest import Contest
 from ..repos.contest_repos import ContestRepos

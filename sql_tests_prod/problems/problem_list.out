@@ -1,0 +1,500 @@
+1,Another Sorting Problem,0,"data structures, sortings, strings"
+2,Building an Amusement Park,0,"binary search, geometry"
+3,Cyclic Sum,0,"data structures, fft, number theory"
+4,Divisible by Twenty-Five,0,"brute force, dfs and similar, dp"
+5,Eye-Pleasing City Park Tour,0,"data structures, trees"
+6,Finding Expected Value,0,math
+7,GCD Festival,0,"math, number theory"
+8,Holiday Wall Ornaments,0,"dp, strings"
+9,Illusions of the Desert,1,"data structures, trees"
+10,Jeopardy of Dropped Balls,1,"binary search, brute force, dsu, implementation"
+11,Knitting Batik,1,"implementation, math"
+12,Longest Array Deconstruction,2,"data structures, divide and conquer, dp, sortings"
+13,Managing Telephone Poles,2,"data structures, geometry"
+14,Casimir's String Solitaire,0,"math, strings"
+15,Shifting Sort,0,"implementation, sortings"
+16,Ticks,0,"greedy, implementation"
+17,Productive Meeting,0,"constructive algorithms, graphs, greedy"
+18,1579_E2. Array Optimization by Deque,0,"data structures, greedy"
+19,Array Stabilization (AND version),0,"brute force, graphs, math, number theory, shortest paths"
+20,Minimal Coverage,0,dp
+21,Portal,0,"brute force, data structures, dp, greedy, implementation"
+22,Mathematics Curriculum,0,"brute force, combinatorics, dp, trees"
+23,Train Maintenance,0,"brute force, data structures, implementation"
+24,Subsequence,0,"brute force, divide and conquer, dp, greedy, trees"
+25,Railway Construction,0,"brute force, constructive algorithms, data structures, graphs, shortest paths"
+26,Problems for Codeforces,0,"combinatorics, fft, math"
+27,CQXYM Count Permutations,0,"combinatorics, math, number theory"
+28,Diameter of Graph,0,"constructive algorithms, graphs, greedy, math"
+29,Luntik and Concerts,0,math
+30,Luntik and Subsequences,0,"combinatorics, math"
+31,Grandma Capa Knits a Scarf,0,"brute force, data structures, greedy, strings, two pointers"
+32,"Vupsen, Pupsen and 0",0,"constructive algorithms, math"
+33,Pchelyonok and Segments,0,"binary search, data structures, dp, greedy, math"
+34,1582_F1. Korney Korneevich and XOR (easy version),0,"bitmasks, dp, greedy"
+35,1582_F2. Korney Korneevich and XOR (hard version),0,"binary search, brute force, dp, greedy, two pointers"
+36,Kuzya and Homework,0,"data structures, number theory"
+37,Windblume Ode,0,"brute force, constructive algorithms, greedy, math, number theory"
+38,Omkar and Heavenly Tree,0,"brute force, constructive algorithms, trees"
+39,Omkar and Determination,0,"constructive algorithms, dp, greedy, implementation, two pointers"
+40,Omkar and the Meaning of Life,0,"constructive algorithms, greedy, interactive, math"
+41,Moment of Bloom,0,"constructive algorithms, dfs and similar, dsu, graph matchings, graphs, greedy, trees"
+42,Defender of Childhood Dreams,0,"bitmasks, constructive algorithms, divide and conquer, graphs, greedy, math"
+43,Omkar and Time Travel,0,"data structures, dp, math"
+44,Omkar and Tours,0,"data structures, dsu, sortings, trees"
+45,Omkar and Mosaic,1,"combinatorics, constructive algorithms, math"
+46,Life of a Flower,0,implementation
+47,Array Eversion,0,greedy
+48,Minimize Distance,0,"greedy, math"
+49,Yet Another Sorting Problem,0,"constructive algorithms, data structures, math, sortings"
+50,Frequency Queries,0,"binary search, data structures, dfs and similar, trees, two pointers"
+51,Non-equal Neighbours,0,"combinatorics, data structures, dp, math"
+52,Consecutive Sum Riddle,0,math
+53,Special Numbers,0,"bitmasks, math"
+54,Make Them Equal,0,"brute force, greedy, math, strings"
+55,The Number of Imposters,0,"constructive algorithms, dfs and similar, dp, dsu, graphs"
+56,1594_E1. Rubik's Cube Coloring (easy version),0,"combinatorics, math"
+57,1594_E2. Rubik's Cube Coloring (hard version),0,"brute force, dp, implementation, math, trees"
+58,Ideal Farm,0,"constructive algorithms, math"
+59,Computer Game,0,"brute force, dfs and similar, dp, implementation"
+60,Groups,0,"brute force, implementation"
+61,Delete Two Elements,0,"data structures, dp, implementation, math, two pointers"
+62,Training Session,0,"combinatorics, data structures, geometry, implementation, math"
+63,Staircases,0,"brute force, combinatorics, data structures, dfs and similar, dp, implementation, math"
+64,RBS,0,"binary search, bitmasks, brute force, data structures, dp"
+65,The Sum of Good Numbers,0,"hashing, math, string suffix structures, strings"
+66,Weights,0,"constructive algorithms, greedy, two pointers"
+67,Restaurant Game,0,
+68,Bubble Strike,0,"combinatorics, math, probabilities, ternary search"
+69,Bubble Popping,0,
+70,Two Arrays,0,"data structures, matrices"
+71,Mars,0,hashing
+72,Shortest path,0,"brute force, geometry, math, shortest paths"
+73,Hidden Fortress,0,"interactive, math"
+74,Desert,1,"data structures, graphs"
+75,Bob's Beautiful Array,1,"bitmasks, brute force, greedy"
+76,Array Game,0,"games, greedy, two pointers"
+77,Party Organization,0,"brute force, math, probabilities"
+78,Robot Factory,1,"bitmasks, dfs and similar"
+79,Array Elimination,0,"bitmasks, greedy, math, number theory"
+80,Frog Traveler,0,"data structures, dfs and similar, dp, graphs, shortest paths, two pointers"
+81,Optimal Insertion,0,"data structures, divide and conquer, dp, greedy, sortings"
+82,Difficult Mountain,0,"data structures, dp, greedy, sortings"
+83,Phys Ed Online,0,"data structures, dp, greedy"
+84,Two Sorts,0,"binary search, dfs and similar, math, meet-in-the-middle"
+85,Artistic Partition,0,"divide and conquer, dp, number theory"
+86,A Perfect Problem,0,"combinatorics, dp, math"
+87,"October 18, 2017",0,"combinatorics, dp, implementation, math"
+88,Era,0,greedy
+89,XOR Specia-LIS-t,0,constructive algorithms
+90,Di-visible Confusion,0,"brute force, greedy, math, number theory"
+91,Moderate Modular Mode,0,"math, number theory"
+92,Extreme Extension,0,"dp, greedy, number theory"
+93,AB Balance,0,strings
+94,Update Files,0,"greedy, implementation, math"
+95,Banknotes,0,"greedy, number theory"
+96,Red-Blue Matrix,0,"brute force, constructive algorithms, implementation, sortings"
+97,Arena,0,"combinatorics, dp, math"
+98,Tree Queries,0,"brute force, dp, trees"
+99,Linear Keyboard,0,"implementation, strings"
+100,Odd Grasshopper,0,math
+101,Minimum Extraction,0,"brute force, sortings"
+102,Blue-Red Permutation,0,"greedy, math, sortings"
+103,Robot on the Board 1,0,implementation
+104,Robot on the Board 2,0,"brute force, dfs and similar, dp, graphs, implementation"
+105,Banquet Preparations 1,0,greedy
+106,Banquet Preparations 2,0,"greedy, sortings, two pointers"
+107,Find Array,0,"constructive algorithms, math"
+108,Build the Permutation,0,"constructive algorithms, greedy"
+109,Game Master,0,"data structures, dfs and similar, dp, graphs, greedy, two pointers"
+110,Dominoes,0,"combinatorics, fft, graphs, math, number theory"
+111,The Cells on the Paper,0,"binary search, implementation, sortings"
+112,MEX counting,0,"combinatorics, dp, implementation"
+113,Alphabetic Tree,0,"binary search, data structures, dfs and similar, hashing, string suffix structures, strings, trees"
+114,Long Comparison,0,"implementation, math"
+115,Absent Remainder,0,"greedy, implementation, sortings"
+116,Poisoned Dagger,0,binary search
+117,MEX Sequences,0,"dp, math"
+118,Crazy Robot,0,"dfs and similar, graphs"
+119,Tree Coloring,0,"combinatorics, divide and conquer, fft"
+120,Closing The Gap,0,"greedy, math"
+121,And It's Non-Zero,0,"bitmasks, greedy, math"
+122,Menorah,0,"brute force, graphs, greedy, math"
+123,X(or)-mas Tree,0,"bitmasks, dfs and similar, dsu, graphs, trees"
+124,Purple Crayon,0,"data structures, dfs and similar, games, graphs, greedy, math, sortings, trees"
+125,LEGOndary Grandmaster,0,"combinatorics, dp, math"
+126,Maximum Adjacent Pairs,0,"constructive algorithms, graph matchings"
+127,Reindeer Games,0,"binary search, constructive algorithms, data structures, divide and conquer, flows, graphs, shortest paths"
+128,Forbidden Subsequence,0,"constructive algorithms, greedy, sortings, strings"
+129,GCD Problem,0,"brute force, constructive algorithms, math, number theory"
+130,Paprika and Permutation,0,"binary search, greedy, math, sortings"
+131,1617_D2. Too Many Impostors (hard version),0,"constructive algorithms, implementation, interactive, math"
+132,Christmas Chocolates,0,"dfs and similar, dp, games, graphs, implementation, math, number theory, shortest paths, trees"
+133,Polycarp and Sums of Subsequences,0,"math, sortings"
+134,Missing Bigram,0,implementation
+135,Paint the Array,0,math
+136,Array and Operations,0,"dp, greedy, math"
+137,Singers' Tour,0,"constructive algorithms, math"
+138,Reverse,0,"bitmasks, constructive algorithms, dfs and similar, implementation, math, strings"
+139,Trader Problem,0,"data structures, dsu, greedy, sortings"
+140,Square String?,0,"implementation, strings"
+141,Squares and Cubes,0,"implementation, math"
+142,Wrong Addition,0,implementation
+143,New Year's Problem,0,"binary search, greedy, sortings"
+144,MEX and Increments,0,"constructive algorithms, data structures, dp, greedy, implementation, math, sortings"
+145,Let's Play the Hat?,0,"brute force, constructive algorithms, greedy, math"
+146,Unusual Minesweeper,0,"binary search, dfs and similar, dsu, greedy, sortings"
+147,Permutation and Queries,0,"brute force, data structures, divide and conquer, two pointers"
+148,Equal or Not Equal,0,"constructive algorithms, dsu, implementation"
+149,Triangles on a Rectangle,0,"geometry, greedy, math"
+150,BA-String,0,"brute force, dp, greedy, implementation, math"
+151,Exact Change,0,"brute force, constructive algorithms, greedy"
+152,Replace the Numbers,0,"constructive algorithms, data structures, dsu, implementation"
+153,Bipartite Array,0,"dp, greedy"
+154,Subsequences Galore,0,"bitmasks, combinatorics, dp"
+155,Construct a Rectangle,0,"geometry, math"
+156,Berland Music,0,"data structures, greedy, math, sortings"
+157,Set or Decrease,0,"binary search, brute force, greedy, sortings"
+158,Shuffle,0,"combinatorics, math, two pointers"
+159,Math Test,0,"bitmasks, brute force, greedy"
+160,Quadratic Set,0,"constructive algorithms, hashing, math, number theory"
+161,Robot Cleaner,0,"brute force, implementation, math"
+162,Game on Ranges,0,"brute force, dfs and similar, implementation, sortings"
+163,Balanced Stone Heaps,0,"binary search, greedy"
+164,Robot Cleaner Revisit,0,"implementation, math, probabilities"
+165,Middle Duplication,0,"data structures, dfs and similar, greedy, strings, trees"
+166,brcktsrm,0,
+167,comm3,0,
+168,gcd2,0,
+169,luckybal,0,
+170,prpaln,0,
+171,tf01,0,
+172,Cycle sort,0,"dsu, math"
+173,Trips,0,graphs
+174,Phone Numbers,0,brute force
+175,Mergesort Strikes Back,0,"math, probabilities"
+176,Minimum Integer,0,math
+177,Isolation,0,"data structures, dp"
+178,Election Promises,0,"games, graphs"
+179,Sliding Doors,0,"*special, binary search"
+180,1189_D1. Add on a Tree,0,trees
+181,Restore Permutation,0,"binary search, data structures, greedy, implementation"
+182,1227_D1. Optimal Subsequences (Easy Version),0,"data structures, greedy"
+183,The Feast and the Bus,0,"brute force, constructive algorithms, greedy, math"
+184,K Integers,0,"binary search, data structures"
+185,Prefix Enlightenment,0,"dfs and similar, dsu, graphs"
+186,Moving Points,0,"data structures, divide and conquer, implementation, sortings"
+187,Minimum Euler Cycle,0,"constructive algorithms, graphs, greedy, implementation"
+188,Summoning Minions,0,"constructive algorithms, dp, flows, graph matchings, greedy, sortings"
+189,1374_E1. Reading Books (easy version),0,"data structures, greedy, sortings"
+190,Bad Triangle,0,"geometry, math"
+191,Putting Bricks in the Wall,0,"constructive algorithms, implementation"
+192,Help Vasilisa the Wise 2,0,"brute force, math"
+193,Euclid's nightmare,0,"bitmasks, dfs and similar, dsu, graphs, greedy, math, sortings"
+194,Old Floppy Drive,0,"binary search, data structures, math"
+195,Add One,0,"dp, matrices"
+196,1540_C1. Converging Array (Easy Version),0,"dp, math"
+197,Wizards and Demonstration,0,"implementation, math"
+198,Array Sorting,0,"*special, implementation"
+199,Equation,0,math
+200,Graph Game,0,graphs
+201,Ancient Prophesy,0,"brute force, implementation, strings"
+202,Cows and Poker Game,0,"brute force, implementation"
+203,Context Advertising,0,"dp, two pointers"
+204,331_E2. Deja Vu,0,"constructive algorithms, dp"
+205,Lucky Number Representation,0,"constructive algorithms, dfs and similar, dp"
+206,New Year Candles,0,implementation
+207,Multiplication Table,0,implementation
+208,Sereja and Squares,0,"binary search, data structures, hashing"
+209,Cola,0,implementation
+210,Pairwise Sums,0,*special
+211,Birthday,0,"data structures, dfs and similar, dp, trees"
+212,A and B and Compilation Errors,0,"data structures, implementation, sortings"
+213,Woodcutters,0,"dp, greedy"
+214,Geometric Progressions,0,math
+215,Beautiful Function,0,"constructive algorithms, math"
+216,Bulbs,0,implementation
+217,Factory Repairs,0,data structures
+218,Rebus,0,"constructive algorithms, expression parsing, greedy, math"
+219,Dividing Kingdom II,0,"brute force, data structures, dsu, graphs, sortings"
+220,Lucky Tickets,0,"binary search, data structures, sortings, two pointers"
+221,Bottles,1,dp
+222,Dasha and cyclic table,0,"bitmasks, brute force, fft, strings, trees"
+223,A Serial Killer,0,"brute force, implementation, strings"
+224,Memory Manager,0,implementation
+225,Mister B and PR Shifts,0,"data structures, implementation, math"
+226,Chemistry in Berland,0,"dfs and similar, greedy, trees"
+227,Bark to Unlock,0,"brute force, implementation, strings"
+228,Credit Card,0,"data structures, dp, greedy, implementation"
+229,Garden,0,implementation
+230,Run For Your Prize,0,"brute force, greedy"
+231,Destruction of a Tree,0,"constructive algorithms, dfs and similar, dp, greedy, trees"
+232,Post Lamps,0,"brute force, greedy"
+233,appu-and-sugarcane-farm,0,
+234,chandu-and-his-girlfriend-returns,0,
+235,discover-the-monk,0,
+236,golu-and-coins-1,0,
+237,list-sort,0,
+238,monks-choice-of-numbers-1,0,
+239,playing-with-substrings,0,
+240,roys-life-cycle,0,
+241,subtraction-game-theory-1,0,
+242,vowel,0,
+243,p02613 AtCoder Beginner Contest 173 - Judge Status Summary,0,""
+244,p02744 Panasonic Programming Contest 2020 - String Equivalence,0,""
+245,p02879 AtCoder Beginner Contest 144 - 9x9,0,""
+246,p03013 AtCoder Beginner Contest 129 - Typical Stairs,0,""
+247,p03153 KEYENCE Programming Contest 2019 - Connecting Cities,0,""
+248,p03297 AtCoder Grand Contest 026 - rng_10s,0,""
+249,p03455 AtCoder Beginner Contest 086 - Product,0,""
+250,p03616 AtCoder Regular Contest 082 - Sandglass,0,""
+251,p03774 AtCoder Beginner Contest 057 - Checkpoints,0,""
+252,p03943 AtCoder Beginner Contest 047 - Fighting over Candies,0,""
+253,p00035 Is it Convex?,0,""
+254,p00167 Bubble Sort,0,""
+255,p00323 Metal Recycling,0,""
+256,p00493 Zig-Zag Numbers,0,""
+257,p00680 KND Factory,0,""
+258,p00822 Weather Forecast,0,""
+259,p00953 Animal Companion in Maze,0,""
+260,p01086 Short Phrase,0,""
+261,p01222 Walk under a Scorching Sun,0,""
+262,p01356 Nearest Station,0,""
+263,p01538 Kakezan,0,""
+264,p01694 Step Aerobics,0,""
+265,p01838 Optimal Tournament,0,""
+266,p01974 Pigeonhole principle,0,""
+267,p02120 Cluster Network,0,""
+268,p02260 Selection Sort,0,""
+269,p02408 Finding Missing Cards,0,""
+270,cdva1502,0,
+271,dbyz15t,0,
+272,ig01,0,
+273,muffins3,0,
+274,rrcode,0,
+275,walk,0,
+276,Vectors,0,"implementation, math"
+277,Elections,0,"implementation, math"
+278,Up and Down the Tree,0,"dfs and similar, dp, trees"
+279,Ehab and another another xor problem,0,"bitmasks, constructive algorithms, implementation, interactive"
+280,Compression,0,"dp, implementation, math, number theory"
+281,Nastya Is Buying Lunch,0,greedy
+282,Reverse a Substring,0,"implementation, sortings, strings"
+283,Destroy it!,0,"dp, implementation, sortings"
+284,1195_D2. Submarine in the Rybinsk Sea (hard edition),0,"combinatorics, math, number theory"
+285,Unusual Graph,1,"*special, graphs"
+286,Stones,0,"brute force, greedy, math"
+287,Cheap Robot,0,"binary search, dsu, graphs, shortest paths, trees"
+288,Two Fairs,0,"combinatorics, dfs and similar, dsu, graphs"
+289,Modernization of Treeland,0,"*special, dfs and similar, trees"
+290,Blocks and Sensors,0,brute force
+291,Piet,0,implementation
+292,James and the Chase,0,"dfs and similar, graphs, probabilities, trees"
+293,Common Subsequence,0,brute force
+294,Fancy Fence,0,"*special, data structures, dsu, implementation, math, sortings"
+295,BubbleSquare Tokens,-1,
+296,1446_D2. Frequency Problem (Hard Version),0,"data structures, greedy, two pointers"
+297,Strange Permutation,0,"binary search, combinatorics, data structures, dp, graphs, implementation, two pointers"
+298,Genius,0,"bitmasks, dp, graphs, number theory"
+299,Win or Freeze,0,"games, math, number theory"
+300,Pair Programming,0,"greedy, two pointers"
+301,Ancient Berland Hieroglyphs,0,two pointers
+302,Let's Watch Football,0,"binary search, brute force, math"
+303,k-String,0,"implementation, strings"
+304,King's Path,0,"dfs and similar, graphs, hashing, shortest paths"
+305,Games,0,brute force
+306,Orange,0,"*special, implementation"
+307,316_B2. EKG,0,"dfs and similar, dp"
+308,Helpful Maths,0,"greedy, implementation, sortings, strings"
+309,Levko and Array Recovery,0,"greedy, implementation"
+310,Bear and Raspberry,0,"brute force, greedy, implementation"
+311,Graph Cutting,0,"dfs and similar, graphs"
+312,Kitahara Haruki's Gift,0,"brute force, implementation"
+313,Civilization,0,"dfs and similar, dp, dsu, ternary search, trees"
+314,Initial Bet,0,implementation
+315,New Year Book Reading,0,"constructive algorithms, greedy, implementation, math"
+316,King of Thieves,0,"brute force, implementation"
+317,ZgukistringZ,0,"brute force, constructive algorithms, implementation, strings"
+318,Weakness and Poorness,0,ternary search
+319,Chat Server's Outgoing Traffic,0,implementation
+320,Rat Kwesh and Cheese,0,"brute force, constructive algorithms, math"
+321,Bear and Two Paths,0,"constructive algorithms, graphs"
+322,Game of Robots,0,implementation
+323,Swaps in Permutation,0,"dfs and similar, dsu, math"
+324,Complete The Graph,0,"binary search, constructive algorithms, graphs, shortest paths"
+325,Road to Cinema,0,"binary search, greedy, sortings"
+326,Bacterial Melee,0,"brute force, combinatorics, dp, string suffix structures"
+327,Kids' Riddle,0,*special
+328,Fake NP,0,"greedy, math"
+329,Office Keys,0,"binary search, brute force, dp, greedy, sortings"
+330,Arpa and an exam about geometry,0,"geometry, math"
+331,High Cry,0,"binary search, bitmasks, combinatorics, data structures, divide and conquer"
+332,Chip Play,0,"brute force, data structures, implementation"
+333,Connected Components?,0,"data structures, dfs and similar, dsu, graphs"
+334,Data Center Maintenance,0,"dfs and similar, graphs"
+335,Two-gram,0,"implementation, strings"
+336,Game,0,math
+337,battle-of-stalingrad-1,0,
+338,class-homework,0,
+339,even-from-end-1,0,
+340,hermione-vs-draco,0,
+341,magic-gcd,0,
+342,new-world-11,0,
+343,professor-sharma,0,
+344,sherlock-and-kgb,0,
+345,the-competitive-class-3,0,
+346,xenny-and-range-sums,0,
+347,p02652 AtCoder Grand Contest 045 - 01 Unbalanced,0,""
+348,p02781 AtCoder Beginner Contest 154 - Almost Everywhere Zero,0,""
+349,p02916 AtCoder Beginner Contest 140 - Buffet,0,""
+350,p03052 diverta 2019 Programming Contest - Edge Ordering,0,""
+351,p03194 CADDi 2018 for Beginners - Product and GCD,0,""
+352,p03343 AtCoder Regular Contest 098 - Range Minimum Queries,0,""
+353,p03503 AtCoder Beginner Contest 080 - Shopping Street,0,""
+354,p03664 AtCoder Regular Contest 078 - Mole and Abandoned Mine,0,""
+355,p03819 AtCoder Regular Contest 068 - Snuke Line,0,""
+356,p03986 AtCoder Grand Contest 005 - STring,0,""
+357,p00074 Videotape,0,""
+358,p00206 Next Trip,0,""
+359,p00365 Age Difference,0,""
+360,p00573 Commuter Pass,0,""
+361,p00720 Earth Observation with a Mobile Robot Team,0,""
+362,p00860 The Morning after Halloween,0,""
+363,p00991 Grid,0,""
+364,p01123 Let's Move Tiles!,0,""
+365,p01262 Adaptive Time Slicing Quantization,0,""
+366,p01422 Beautiful Currency,0,""
+367,p01576 Exciting Bicycle,0,""
+368,p01738 Gravity Point,0,""
+369,p01878 Destiny Draw,0,""
+370,p02014 Rough Sorting,0,""
+371,p02157 Shuffle 2,0,""
+372,p02298 Is-Convex,0,""
+373,p02445 Swap,0,""
+374,bogosort,0,
+375,colarr,0,
+376,gameaam,0,
+377,lucky5,0,
+378,proposal,0,
+379,tech07,0,
+380,Chemical table,0,"constructive algorithms, dfs and similar, dsu, graphs, matrices"
+381,Reach Median,0,greedy
+382,Item World,0,"brute force, implementation, sortings"
+383,Maximum Distance,0,"dsu, graphs, shortest paths, sortings"
+384,Dasha and Chess,0,"constructive algorithms, games, interactive"
+385,1129_A2. Toy Train,0,"brute force, greedy"
+386,Three Religions,0,"dp, implementation, strings"
+387,Bad Days,0,"*special, implementation"
+388,Keanu Reeves,0,strings
+389,XORinacci,0,math
+390,Math Problem,0,math
+391,Squares,0,math
+392,Modulo Equality,0,"brute force, sortings"
+393,Array Sharpening,0,"greedy, implementation"
+394,Perform the Combo,0,brute force
+395,Level Statistics,0,"implementation, math"
+396,1354_C2. Not So Simple Polygon Embedding,0,"binary search, brute force, geometry, math"
+397,"Multiply by 2, divide by 6",0,math
+398,Multiples of Length,0,"constructive algorithms, greedy, number theory"
+399,Rescue Nibel!,0,"combinatorics, data structures, sortings"
+400,Greedy Shopping,0,"binary search, data structures, divide and conquer, greedy, implementation"
+401,Canine poetry,0,"dp, greedy, strings"
+402,Permutation Transformation,0,"dfs and similar, divide and conquer, implementation"
+403,Short Task,0,"brute force, dp, math, number theory"
+404,Euclidean Distance,0,*special
+405,Wizards and Numbers,0,"games, math"
+406,Asterisks,0,"*special, implementation"
+407,Pixels,0,"constructive algorithms, math"
+408,LCM Challenge,0,number theory
+409,Roads not only in Berland,0,"dsu, graphs, trees"
+410,Cows and Cool Sequences,0,"dp, math, number theory"
+411,"White, Black and White Again",0,"combinatorics, number theory"
+412,331_D2. Escaping on Beaveractor,0,graphs
+413,Game with Strings,0,"bitmasks, dp, games"
+414,Maze,0,dfs and similar
+415,What Has Dirichlet Got to Do with That?,0,"dp, games"
+416,Sereja and Swaps,0,"brute force, sortings"
+417,Jzzhu and Numbers,0,"bitmasks, combinatorics, dp"
+418,Eval,0,*special
+419,Treasure,0,greedy
+420,Arthur and Questions,0,"greedy, implementation, math, ternary search"
+421,Remembering Strings,0,"bitmasks, dp"
+422,Minimization,0,"dp, greedy, sortings"
+423,BCPC,0,"binary search, geometry, two pointers"
+424,Peter and Snow Blower,0,"binary search, geometry, ternary search"
+425,Fibonacci-ish II,0,"data structures, implementation"
+426,Binary Table,0,"bitmasks, brute force, divide and conquer, dp, fft, math"
+427,NP-Hard Problem,0,"dfs and similar, graphs"
+428,Centroids,0,"data structures, dfs and similar, dp, graphs, greedy, trees"
+429,Car Repair Shop,0,implementation
+430,Ilya and tic-tac-toe game,0,"brute force, implementation"
+431,Stepan and Vowels,1,"*special, implementation, strings"
+432,Password,0,"bitmasks, dp, shortest paths"
+433,Mister B and Book Reading,0,implementation
+434,Math Show,0,"brute force, greedy"
+435,Gotta Go Fast,0,"binary search, dp"
+436,Chess For Three,0,implementation
+437,Substrings in a String,0,"bitmasks, brute force, data structures, string suffix structures, strings"
+438,Sleepy Game,0,"dfs and similar, dp, games, graphs"
+439,Simple Cycles Edges,0,"dfs and similar, graphs, trees"
+440,Micro-World,0,"greedy, sortings"
+441,ankit-and-race-team-10,0,
+442,chandu-and-daspal-2,0,
+443,digital-numbers,0,
+444,give-me-my-test-monk,0,
+445,lexicographically-preceding-permutation,0,
+446,monks-birthday-party,0,
+447,play-with-string,0,
+448,roy-and-wobbly-numbers,0,
+449,substrings-count-3,0,
+450,vibhu-and-his-mathematics,0,
+451,p02610 AIsing Programming Contest 2020 - Camel Train,0,""
+452,p02741 Panasonic Programming Contest 2020 - Kth Term,0,""
+453,p02876 AtCoder Grand Contest 040 - Balance Beam,0,""
+454,p03010 diverta 2019 Programming Contest 2 - Diverta City,0,""
+455,p03150 KEYENCE Programming Contest 2019 - KEYENCE String,0,""
+456,p03294 AtCoder Beginner Contest 103 - Modulo Summation,0,""
+457,p03452 AtCoder Regular Contest 090 - People on a Line,0,""
+458,p03612 AtCoder Beginner Contest 072 - Derangement,0,""
+459,p03771 AtCoder Grand Contest 012 - Camel and Oases,0,""
+460,p03940 AtCoder Grand Contest 007 - Shik and Game,0,""
+461,p00032 Plastic Board,0,""
+462,p00163 Highway Toll,0,""
+463,p00320 Cuboid,0,""
+464,p00490 Best Pizza,0,""
+465,p00676 KND is So Sexy,0,""
+466,p00819 Unreliable Message,0,""
+467,p00950 Infallibly Crack Perplexing Cryptarithm,0,""
+468,p01083 RedBlue,0,""
+469,p01219 Private Teacher,0,""
+470,p01353 Rabbit Plays Games!,0,""
+471,p01535 Markup language has Declined,0,""
+472,p01691 Disappear Drive,0,""
+473,p01835 Donut Decoration,0,""
+474,p01970 The Diversity of Prime Factorization,0,""
+475,p02117 Picnic,0,""
+476,p02257 Prime Numbers,0,""
+477,p02405 Print a Chessboard,0,""
+478,anuwta,0,
+479,chsparr,0,
+480,etmx05,0,
+481,laddu,0,
+482,pcsc1,0,
+483,stadium,0,
+484,Mini Metro,0,dp
+485,Vasya and Good Sequences,0,"bitmasks, dp"
+486,Putting Boxes Together,0,data structures
+487,Intersecting Subtrees,0,"dfs and similar, interactive, trees"
+488,The Top Scorer,0,"combinatorics, dp, math, probabilities"
+489,Crisp String,0,"bitmasks, dp"
+490,Parity Alternated Deletions,0,"greedy, implementation, sortings"
+491,Remainder,0,"implementation, math"
+492,1184_B3. The Doctor Meets Vader (Hard),0,"flows, shortest paths"
+493,You Are Given a WASD-string...,0,"brute force, data structures, dp, greedy, implementation, math, strings"
+494,Function Composition,0,dfs and similar
+495,The Football Season,0,"brute force, math, number theory"
+496,Beautiful Regional Contest,0,"greedy, implementation"
+497,Fadi and LCM,0,"brute force, math, number theory"
+498,1-Trees and Queries,0,"data structures, dfs and similar, shortest paths, trees"
+499,Make k Equal,0,greedy
+500,Phoenix and Memory,0,"data structures, dfs and similar, graphs, greedy"

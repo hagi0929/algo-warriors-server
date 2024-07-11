@@ -1,3 +1,5 @@
+you can view the lists of apis here https://algo-warriors-server.vercel.app/
+
 # Setup
 
 ### Prerequisites

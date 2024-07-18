@@ -25,3 +25,11 @@ class RedisRepos:
     @staticmethod
     def store_role_permissions(role, permissions):
         redis_db.set(f"role:{role}", str(permissions))
+
+    @staticmethod
+    def blacklist_jwt(jwt, type):
+        redis_db.set(f"blacklist:{jwt}", type)
+
+    @staticmethod
+    def is_blacklisted(jwt):
+        return redis_db.get(f"blacklist:{jwt}")

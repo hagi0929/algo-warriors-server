@@ -20,7 +20,6 @@ api_bp.register_blueprint(submission_bp, url_prefix="/submission")
 
 @api_bp.errorhandler(HTTPException)
 def handle_error(error: HTTPException):
-    """ Handle BluePrint JSON Error Response """
     response = {
         'error': error.__class__.__name__,
         'message': error.description,

@@ -43,7 +43,6 @@ class ProblemDetailed(AbstractProblem):
         }
 
 
-
 class ProblemCreationRequest(AbstractProblem):
     def __init__(self, title: str, description: str, created_by: int,
                  tags: Optional[List[int]] = None, test_cases: Optional[dict] = None):

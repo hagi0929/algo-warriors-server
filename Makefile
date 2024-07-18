@@ -5,23 +5,15 @@ FLASK := FLASK_APP=$(FLASK_APP) env/bin/flask
 SETUP_DIR := ./setup
 .PHONY: run
 run:
-	flask run
+	poetry run python app.py
 
 .PHONY: run-prod
-run-production:
-	flask run
+run-prod:
+	poetry run python app.py --gunicorn --env prod
 
-.PHONY: init
+.PHONY: install
 init:
-	@sh ${SETUP_DIR}/init_setup.sh
-
-.PHONY: export-env
-export-env:
-	@conda env export | grep -v "^prefix: " > environment.yml
-
-.PHONY: update-env
-import-env: 
-	conda env update --file environment.yaml --prune
+	poetry install
 
 .PHONY: clean
 clean:

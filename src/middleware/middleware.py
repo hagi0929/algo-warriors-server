@@ -5,7 +5,14 @@ from flask import request, jsonify
 from flask_jwt_extended import JWTManager, verify_jwt_in_request, get_jwt, get_jwt_identity
 from src.repos.redis_repos import RedisRepos
 from src.repos.user_repos import UserRepos
-from src import jwt
+from . import jwt
+
+
+@jwt.token_in_blocklist_loader
+def check_if_token_is_revoked(jwt_header, jwt_payload: dict):
+    jti = jwt_payload["jti"]
+    token_in_redis = RedisRepos.is_blacklisted(jti)
+    return token_in_redis is not None
 
 
 def require_auth(required_permissions: None | List[str] = None, pass_auth_info: bool = False):
@@ -40,7 +47,9 @@ def require_auth(required_permissions: None | List[str] = None, pass_auth_info: 
                         "permissions": user_permissions
                     }
             return f(*args, **kwargs)
+
         return decorated_function
+
     return decorator
 
 

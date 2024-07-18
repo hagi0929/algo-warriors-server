@@ -46,10 +46,3 @@ def get_problem(problem_id):
         return jsonify(problem.to_dict())
     return jsonify({'message': 'Problem not found'}), 404
 
-
-@problem_bp.route('/<int:problem_id>/submit', methods=['POST'])
-@require_auth(required_permissions=["submit_code"], pass_auth_info=True)
-def submit_code(problem_id):
-    code = request.json.get('code')  
-    result = ProblemService.submit_code(problem_id, code)
-    return jsonify(result)

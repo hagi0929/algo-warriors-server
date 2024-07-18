@@ -8,7 +8,7 @@ class ProblemRepos:
     @staticmethod
     def get_problem_list() -> list[ProblemMinimal]:
         query = text("""
-        SELECT problem_id, title FROM Problem
+        SELECT problem_id, title FROM Problem LIMIT 100
         """)
         result = db.session.execute(query)
         problems = []
@@ -18,10 +18,6 @@ class ProblemRepos:
                 title=row[1],
             ))
 
-        
-        
-        
-        
         return problems
 
     @staticmethod

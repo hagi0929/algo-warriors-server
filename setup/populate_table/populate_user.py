@@ -2,9 +2,7 @@ import json
 import psycopg2
 from dotenv import dotenv_values
 
-
 env_vars = dotenv_values('.env')
-
 
 
 def connect_db():
@@ -25,12 +23,10 @@ def connect_db():
         return None
 
 
-
 def execute_query(conn, query, params=()):
     cursor = conn.cursor()
     cursor.execute(query, params)
     return cursor
-
 
 
 def user_exists(conn, user_id):
@@ -39,13 +35,10 @@ def user_exists(conn, user_id):
     return cursor.fetchone() is not None
 
 
-
 def populate_users_from_json(json_file, conn):
-    
     with open(json_file, 'r') as f:
         users = json.load(f)
 
-    
     for user in users:
         if not user_exists(conn, user['user_id']):
             query = """
@@ -55,22 +48,19 @@ def populate_users_from_json(json_file, conn):
             params = (user['user_id'], user['username'], user['role_id'], user['email'], user['password'])
             execute_query(conn, query, params)
 
-    
     conn.commit()
     print("Users have been populated successfully.")
-
 
 
 if __name__ == "__main__":
     users_json_file = 'users.json'
 
-    
     connection = connect_db()
     if connection:
         try:
-            
+
             populate_users_from_json(users_json_file, connection)
         finally:
-            
+
             connection.close()
             print("Connection closed.")

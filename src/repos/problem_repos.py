@@ -71,14 +71,15 @@ class ProblemRepos:
         return problem_id
 
     @staticmethod
-    def delete_problem_by_id(problem_id: int) -> int:
+    def delete_problem_by_id(problem_id: int) -> bool:
         query = text("""
             DELETE FROM problem WHERE problem_id = :problem_id
         """)
-        db.session.execute(query, {
-            'problem_id': problem_id
-        })
+        result = db.session.execute(query, {'problem_id': problem_id})
         db.session.commit()
+
+        if result.rowcount == 0:
+            return False
         return True
 
     @staticmethod

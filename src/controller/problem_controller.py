@@ -1,5 +1,10 @@
 from flask import jsonify, request
+from flask_jwt_extended import get_jwt_identity
 from flask_smorest import Blueprint
+from marshmallow import Schema, post_load, fields
+from werkzeug import Response
+from werkzeug.exceptions import NotFound
+
 from src.middleware.middleware import require_auth
 from src.model.problem import ProblemCreationRequest
 from src.service.problem_service import ProblemService
@@ -7,57 +12,93 @@ from src.service.problem_service import ProblemService
 problem_bp = Blueprint("problems", __name__)
 
 
+class TestCaseSchema(Schema):
+    input = fields.Str(required=True)
+    output = fields.Str(required=True)
+
+
+class CreateProblemSchema(Schema):
+    title = fields.Str(required=True)
+    description = fields.Str(required=True)
+    tags = fields.Int(many=True, required=False)
+    test_cases = fields.List(fields.Nested(TestCaseSchema, required=False))
+
+    @post_load
+    def convert(self, data, **kwargs):
+        return ProblemCreationRequest(**data)
+
+
+class ProblemSchema(Schema):
+    id = fields.Int()
+    title = fields.Str()
+    description = fields.Str()
+    tags = fields.List(fields.Int())
+    test_cases = fields.List(fields.Nested(TestCaseSchema))
+    created_by = fields.Int()
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
+
+
 @problem_bp.route('/', methods=['POST'])
-def create_problem():
-    data = request.get_json()
+@problem_bp.arguments(CreateProblemSchema, as_kwargs=True)
+@problem_bp.response(201)
+@require_auth()
+def create_problem(**kwargs):
     try:
+        user_id = get_jwt_identity()
         problem_request = ProblemCreationRequest(
-            title=data['title'],
-            description=data['description'],
-            created_by=data['created_by'],
-            tags=data.get('tags', []),
-            test_cases=data.get('test_cases', [])
+            title=kwargs['title'],
+            description=kwargs['description'],
+            created_by=user_id,
+            tags=kwargs.get('tags', []),
+            test_cases=kwargs.get('test_cases', [])
         )
         problem_id = ProblemService.create_problem(problem_request)
         response = {
             'problem_id': problem_id,
-            'title': problem_request.title,
-            'description': problem_request.description,
-            'created_by': problem_request.created_by,
-            'tags': problem_request.tags,
-            'test_cases': problem_request.test_cases
         }
         return jsonify(response), 201
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
 
 
+class ProblemMinimalSchema(Schema):
+    problem_id = fields.Int()
+    title = fields.Str()
+    tag_ids = fields.List(fields.Int())
+    difficulty = fields.Str()
+
+
 @problem_bp.route('/list', methods=['GET'])
+@problem_bp.response(200, ProblemMinimalSchema(many=True))
 def get_problem_list():
     problems = [vars(p) for p in ProblemService.get_problem_list()]
     return jsonify(problems)
 
 
 @problem_bp.route('/<int:problem_id>', methods=['GET'])
+@problem_bp.response(200, ProblemSchema)
+@problem_bp.doc(responses={404: "Problem not found"})
 @require_auth([])
 def get_problem(problem_id):
     problem = ProblemService.get_problem_by_id(problem_id)
-    if problem:
-        return jsonify(problem.to_dict())
-    return jsonify({'message': 'Problem not found'}), 404
+    if problem is None:
+        raise NotFound("Problem not found")
+    return jsonify(problem.to_dict())
 
 
 @problem_bp.route('/<int:problem_id>', methods=['DELETE'])
 @require_auth([], pass_auth_info=True)
+@problem_bp.response(204)
+@problem_bp.doc(responses={404: "Problem not found"})
 def delete_problem(problem_id, **kwargs):
     auth_info = kwargs['auth_data']
     user_id = auth_info.get('user_id', None)
     list_of_permissions = auth_info.get('permissions', [])
     problem = ProblemService.get_problem_by_id(problem_id)
     if problem is None:
-        raise Exception("problem does not exist")
-    if "delete_all_problem" in list_of_permissions or ("delete_own_problem" in list_of_permissions and user_id == problem.problem_id):
+        raise NotFound("Problem not found")
+    if "delete_all_problem" in list_of_permissions or (
+            "delete_own_problem" in list_of_permissions and user_id == problem.problem_id):
         ProblemService.delete_problem(problem_id)
-    if problem:
-        return jsonify(problem.to_dict())
-    return jsonify({'message': 'Problem not found'}), 404
+    return Response(problem.to_dict())

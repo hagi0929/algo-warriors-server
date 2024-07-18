@@ -45,7 +45,7 @@ class ProblemDetailed(AbstractProblem):
 
 class ProblemCreationRequest(AbstractProblem):
     def __init__(self, title: str, description: str, created_by: int,
-                 tags: Optional[List[int]] = None, test_cases: Optional[dict] = None):
+                 tags: Optional[List[int]] = None, test_cases: List[dict] = None):
         super().__init__(-1, title)
         self.description: str = description
         self.created_by: int = created_by

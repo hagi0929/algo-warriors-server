@@ -1,3 +1,5 @@
+from werkzeug.exceptions import NotFound
+
 from ..model.problem import ProblemCreationRequest
 from ..repos.problem_repos import ProblemRepos
 
@@ -15,7 +17,7 @@ class ProblemService:
     def get_problem_by_id(problem_id: int):
         obj = ProblemRepos.get_problem_by_id(problem_id)
         if obj is None:
-            return None
+            raise NotFound("Problem not found")
         testcases = ProblemRepos.get_testcases_by_problem_id(problem_id)
         obj.test_cases = testcases
         return obj

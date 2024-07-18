@@ -42,10 +42,10 @@ def require_auth(required_permissions: None | List[str] = None, pass_auth_info: 
                     return jsonify(
                         {"error": "Forbidden", "message": "You do not have permission to access this resource"}
                     ), 403
-                if pass_auth_info:
-                    kwargs["auth_data"] = {
-                        "permissions": user_permissions
-                    }
+            if pass_auth_info:
+                kwargs["auth_data"] = {
+                    "permissions": user_permissions
+                }
             return f(*args, **kwargs)
 
         return decorated_function

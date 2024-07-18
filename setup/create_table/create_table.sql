@@ -85,10 +85,11 @@ CREATE TABLE IF NOT EXISTS Contest (
 );
 
 CREATE TABLE IF NOT EXISTS ContestProblem (
-    problem_id INT PRIMARY KEY,
     contest_id INT,
-    FOREIGN KEY (contest_id) REFERENCES Contest(contest_id),
-    FOREIGN KEY (problem_id) REFERENCES Problem(problem_id)
+    problem_id INT,
+    PRIMARY KEY (contest_id, problem_id),
+    FOREIGN KEY (contest_id) REFERENCES Contest(contest_id) ON DELETE CASCADE,
+    FOREIGN KEY (problem_id) REFERENCES Problem(problem_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ContestParticipant (
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS ContestProblemSubmission (
     problem_id INT,
     submission TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    FOREIGN KEY (problem_id) REFERENCES Problem(problem_id),
+    FOREIGN KEY (problem_id) REFERENCES Problem(problem_id) ON DELETE NULL,
     FOREIGN KEY (participant_id) REFERENCES ServiceUser(user_id)
 );
 

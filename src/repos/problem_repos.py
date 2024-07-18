@@ -21,7 +21,7 @@ class ProblemRepos:
         return problems
 
     @staticmethod
-    def get_problem_by_id(problem_id: int) -> ProblemDetailed:
+    def get_problem_by_id(problem_id: int) -> ProblemDetailed | None:
         query = text("""
         SELECT problem_id, title, description, created_by, created_at FROM Problem p
             NATURAL LEFT JOIN serviceuser u
@@ -30,6 +30,8 @@ class ProblemRepos:
         parameters = {'pid': problem_id}
         result = db.session.execute(query, parameters)
         row = result.first()
+        if row is None:
+            return None
         problem = ProblemDetailed(
             problem_id=row[0],
             title=row[1],
@@ -38,7 +40,6 @@ class ProblemRepos:
             created_at=row[4],
         )
         return problem
-
     @staticmethod
     def get_testcases_by_problem_id(problem_id: int, include_private: bool = False) -> list[TestCase]:
         query = text("""
@@ -68,6 +69,17 @@ class ProblemRepos:
 
         db.session.commit()
         return problem_id
+
+    @staticmethod
+    def delete_problem_by_id(problem_id: int) -> int:
+        query = text("""
+            DELETE FROM problem WHERE problem_id = :problem_id
+        """)
+        db.session.execute(query, {
+            'problem_id': problem_id
+        })
+        db.session.commit()
+        return True
 
     @staticmethod
     def add_test_cases(problem_id: int, test_cases: list[dict]) -> None:

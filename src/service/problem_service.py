@@ -8,8 +8,14 @@ class ProblemService:
         return ProblemRepos.get_problem_list()
 
     @staticmethod
+    def delete_problem(problem_id: int):
+        return ProblemRepos.delete_problem_by_id(problem_id)
+
+    @staticmethod
     def get_problem_by_id(problem_id: int):
         obj = ProblemRepos.get_problem_by_id(problem_id)
+        if obj is None:
+            return None
         testcases = ProblemRepos.get_testcases_by_problem_id(problem_id)
         obj.test_cases = testcases
         return obj

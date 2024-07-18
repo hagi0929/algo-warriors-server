@@ -45,19 +45,7 @@ class UserRepos:
             if not redundant_columns:
                 db.session.execute(reset_sequence_query)
                 db.session.commit()
-
-                try:
-                    insert_user()
-                    return []
-                except IntegrityError as e:
-                    db.session.rollback()
-                    email_exists = db.session.execute(check_email_query, {'email': email}).scalar()
-                    if email_exists:
-                        redundant_columns.append('email')
-                    username_exists = db.session.execute(check_username_query, {'username': username}).scalar()
-                    if username_exists:
-                        redundant_columns.append('username')
-                    redundant_columns.append('user_id')
+                return UserRepos.register_user(email, username, password, role_id)
 
         return redundant_columns
 

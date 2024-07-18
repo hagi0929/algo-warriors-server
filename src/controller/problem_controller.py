@@ -46,3 +46,18 @@ def get_problem(problem_id):
         return jsonify(problem.to_dict())
     return jsonify({'message': 'Problem not found'}), 404
 
+
+@problem_bp.route('/<int:problem_id>', methods=['DELETE'])
+@require_auth([], pass_auth_info=True)
+def delete_problem(problem_id, **kwargs):
+    auth_info = kwargs['auth_data']
+    user_id = auth_info.get('user_id', None)
+    list_of_permissions = auth_info.get('permissions', [])
+    problem = ProblemService.get_problem_by_id(problem_id)
+    if problem is None:
+        raise Exception("problem does not exist")
+    if "delete_all_problem" in list_of_permissions or ("delete_own_problem" in list_of_permissions and user_id == problem.problem_id):
+        ProblemService.delete_problem(problem_id)
+    if problem:
+        return jsonify(problem.to_dict())
+    return jsonify({'message': 'Problem not found'}), 404

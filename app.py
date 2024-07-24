@@ -27,7 +27,6 @@ if __name__ == '__main__':
     parser.add_argument('--gunicorn', action='store_true', help='Run with Gunicorn')
     args = parser.parse_args()
     load_dotenv()
-    print()
     app = create_app(args.env)
 
     if args.gunicorn:

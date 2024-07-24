@@ -11,7 +11,7 @@ run:
 run-prod:
 	poetry run python app.py --gunicorn --env prod
 
-.PHONY: install
+.PHONY: init
 init:
 	poetry install
 

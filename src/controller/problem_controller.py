@@ -65,7 +65,6 @@ def create_problem(**kwargs):
 class ProblemMinimalSchema(Schema):
     problem_id = fields.Int()
     title = fields.Str()
-    tag_ids = fields.List(fields.Int())
     difficulty = fields.Str()
 
 
@@ -79,7 +78,7 @@ def get_problem_list():
 @problem_bp.route('/<int:problem_id>', methods=['GET'])
 @problem_bp.response(200, ProblemSchema)
 @problem_bp.doc(responses={404: "Problem not found"})
-@require_auth([])
+#@require_auth([])
 def get_problem(problem_id):
     problem = ProblemService.get_problem_by_id(problem_id)
     if problem is None:

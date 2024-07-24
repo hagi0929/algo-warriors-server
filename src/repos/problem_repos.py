@@ -8,7 +8,7 @@ class ProblemRepos:
     @staticmethod
     def get_problem_list() -> list[ProblemMinimal]:
         query = text("""
-        SELECT problem_id, title FROM Problem LIMIT 100
+        SELECT problem_id, title, description FROM Problem LIMIT 100
         """)
         result = db.session.execute(query)
         problems = []
@@ -16,6 +16,7 @@ class ProblemRepos:
             problems.append(ProblemMinimal(
                 problem_id=row[0],
                 title=row[1],
+                description=row[2],
             ))
 
         return problems

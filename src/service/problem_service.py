@@ -18,7 +18,7 @@ class ProblemService:
         obj = ProblemRepos.get_problem_by_id(problem_id)
         if obj is None:
             raise NotFound("Problem not found")
-        testcases = ProblemRepos.get_testcases_by_problem_id(problem_id)
+        testcases = ProblemRepos.get_testcases_by_problem_id(problem_id, False)
         obj.test_cases = testcases
         return obj
 
@@ -28,9 +28,3 @@ class ProblemService:
         new_problem_id = ProblemRepos.create_problem(problem_request)
         ProblemRepos.add_test_cases(new_problem_id, problem_request.test_cases)
         return new_problem_id
-
-    @staticmethod
-    
-    def submit_code(problem_id, code):
-        pass
-

@@ -7,25 +7,7 @@ you can view the lists of apis here https://algo-warriors-server.vercel.app/
 
 ### Step-by-Step Instructions
 
-#### 1. **Install Miniconda**
-   - **Linux:**
-     ```bash
-     mkdir -p ~/miniconda3
-     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-     bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-     rm -rf ~/miniconda3/miniconda.sh
-     ~/miniconda3/bin/conda init bash
-     ```
-   - **Mac:**
-     ```bash
-     mkdir -p ~/miniconda3
-     curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
-     bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-     rm -rf ~/miniconda3/miniconda.sh
-     ~/miniconda3/bin/conda init bash
-     ```
-
-#### 2. **Set Up the Python Environment**
+#### 1. **Set Up the Python Environment**
    - Create the environment using the `environment.yml` file:
      ```bash
      conda env create -f environment.yml

@@ -44,8 +44,7 @@ class ProblemRepos:
     def get_testcases_by_problem_id(problem_id: int, include_private: bool = False) -> list[TestCase]:
         query = text("""
         SELECT testcase_id, problem_id, input, output, is_public FROM TestCase p
-            NATURAL LEFT JOIN serviceuser u
-            WHERE problem_id = :pid 
+            WHERE problem_id = :pid
             AND (:include_private = TRUE OR is_public = TRUE)
         """)
         parameters = {'pid': problem_id, 'include_private': include_private}

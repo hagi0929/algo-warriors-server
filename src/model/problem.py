@@ -9,16 +9,14 @@ class AbstractProblem:
 
 
 class ProblemMinimal(AbstractProblem):
-    def __init__(self, problem_id: int, title: str, description:str):
+    def __init__(self, problem_id: int, title: str):
         super().__init__(problem_id, title)
-        self.description: str = description
         
 
     def to_dict(self) -> dict:
         return {
             'problem_id': self.problem_id,
-            'title': self.title,
-            'description': self.description
+            'title': self.title
         }
 
 

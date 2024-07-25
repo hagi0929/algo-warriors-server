@@ -17,7 +17,7 @@ def create_app(config_name):
     redis_db.init_app(app)
     api.init_app(app)
     api.register_blueprint(api_bp)
-    CORS(app) # TODO find elegant way to manage cors
+    CORS(app)  # TODO find elegant way to manage cors
 
     create_middleware(app)
 

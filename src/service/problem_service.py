@@ -1,6 +1,8 @@
+from typing import List
+
 from werkzeug.exceptions import NotFound
 
-from ..model.problem import ProblemCreationRequest
+from ..model.problem import ProblemCreationRequest, ProblemDashboard
 from ..repos.problem_repos import ProblemRepos
 
 
@@ -8,6 +10,10 @@ class ProblemService:
     @staticmethod
     def get_problem_list():
         return ProblemRepos.get_problem_list()
+
+    @staticmethod
+    def get_problem_dashboard_list(filter_options, pagination) -> list[ProblemDashboard]:
+        return ProblemRepos.get_problem_dashboard_list(filter_options, pagination)
 
     @staticmethod
     def delete_problem(problem_id: int):

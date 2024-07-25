@@ -1,5 +1,7 @@
 from flask import jsonify, request
 from flask_smorest import Blueprint
+from marshmallow import Schema, fields
+
 from src.model.tag import Tag
 from src.service.tag_service import TagService
 
@@ -26,9 +28,15 @@ def create_tag():
         return jsonify({'error': str(e)}), 400
 
 
+class TagListQuerySchema(Schema):
+    tag_type = fields.String(required=False)
+
+
 @tag_bp.route('/list', methods=['GET'])
-def get_tag_list():
-    tags = [tag.to_dict() for tag in TagService.get_tag_list()]
+@tag_bp.arguments(TagListQuerySchema, location="query", as_kwargs=True)
+def get_tag_list(**kwargs):
+    tag_type = kwargs.get("tag_type", None)
+    tags = [tag.to_dict() for tag in TagService.get_tag_list(tag_type)]
     return jsonify(tags)
 
 
@@ -53,11 +61,12 @@ def get_problems_by_difficulty(difficulty):
     problems = TagService.find_problems_by_tag('difficulty', difficulty)
     return jsonify([problem.to_dict() for problem in problems])
 
+
 @tag_bp.route('/add_tag_to_problem', methods=['POST'])
 def add_tag_to_problem(problem_id, tag_id):
     TagService.add_tag_to_problem(problem_id, tag_id)
     return jsonify({'message': 'Tag added to problem'}), 200
-    
+
 
 @tag_bp.route('/multiple', methods=['POST'])
 def get_problems_with_multiple_subcategory_tags():
@@ -68,10 +77,12 @@ def get_problems_with_multiple_subcategory_tags():
     problems = TagService.find_problems_with_multiple_tags(difficulty_tags, subcategory_tags, source_tags)
     return jsonify([problem.to_dict() for problem in problems])
 
+
 @tag_bp.route('/subcategory/<string:subcategory>', methods=['GET'])
 def get_problems_by_subcategory(subcategory):
     problems = TagService.find_problems_by_tag('subcategory', subcategory)
     return jsonify([problem.to_dict() for problem in problems])
+
 
 @tag_bp.route('/source/<string:source>', methods=['GET'])
 def get_problems_by_source(source):
@@ -83,6 +94,7 @@ def get_problems_by_source(source):
 def recommend_problems(problem_id):
     problems = TagService.recommend_problems(problem_id)
     return jsonify([problem.to_dict() for problem in problems])
+
 
 @tag_bp.route('/<int:problem_id>', methods=['GET'])
 def get_tags_of_problem(problem_id):

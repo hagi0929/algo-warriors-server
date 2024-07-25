@@ -1,5 +1,5 @@
 from ..model.tag import Tag
-from ..model.problem import ProblemDetailed
+from ..model.problem import ProblemDetailed, ProblemMinimal
 from ..repos.tag_repos import TagRepos
 
 
@@ -37,7 +37,7 @@ class TagService:
         return TagRepos.list_all_problems_with_tags()
     
     @staticmethod
-    def recommend_problems(problem_id) -> list[ProblemDetailed]:
+    def recommend_problems(problem_id) -> list[ProblemMinimal]:
         return TagRepos.recommend_problems(problem_id)
 
     @staticmethod

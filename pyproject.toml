@@ -39,6 +39,7 @@ werkzeug = "3.0.3"
 flask-redis = "^0.4.0"
 gunicorn = "^22.0.0"
 flask-cors = "^4.0.1"
+python-dateutil = "^2.9.0.post0"
 
 
 [build-system]

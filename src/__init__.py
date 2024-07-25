@@ -9,6 +9,7 @@ from flask_cors import CORS
 
 def create_app(config_name):
     app = Flask(__name__)
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
     config = get_config(config_name)
     app.config.from_object(config)
@@ -17,7 +18,6 @@ def create_app(config_name):
     redis_db.init_app(app)
     api.init_app(app)
     api.register_blueprint(api_bp)
-    CORS(app)  # TODO find elegant way to manage cors
 
     create_middleware(app)
 

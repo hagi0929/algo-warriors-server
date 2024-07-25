@@ -7,7 +7,7 @@ class UserSchema(Schema):
     username = fields.Str(required=True)
     email = fields.Email(required=True)
     password = fields.Str(load_only=True)
-    created_at = fields.DateTime(dump_only=True)
+    created_at = fields.DateTime()
     role_id = fields.Int(required=True)
 
     @post_load
@@ -27,8 +27,8 @@ class UserModel:
 
 
 class LoginRequestSchema(Schema):
-    username = fields.Str(required=True)
-    password = fields.Str(required=True)
+    username = fields.Str()
+    password = fields.Str()
 
 
 class RegisterRequestSchema(Schema):

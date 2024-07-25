@@ -65,14 +65,17 @@ class UserRepos:
     @staticmethod
     def get_user_by_user_id(user_id: int) -> UserModel | None:
         query = text("""
-        SELECT user_id, username, email, password, role_id FROM serviceuser WHERE user_id = :user_id
+        SELECT user_id, username, email, password, role_id, created_at FROM serviceuser WHERE user_id = :user_id
         """)
         parameters = {'user_id': user_id}
         result = db.session.execute(query, parameters)
         row = result.fetchone()
         if row:
+            user_data = dict(row._mapping)
+            # Parse the created_at field
+            user_data['created_at'] = user_data['created_at'].isoformat()
             user = UserSchema()
-            return user.load(row._mapping)
+            return user.load(user_data)
         return None
 
     @staticmethod

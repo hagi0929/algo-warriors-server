@@ -1,3 +1,4 @@
+from flask import jsonify, Response
 from flask.views import MethodView
 from flask_jwt_extended import get_jwt_identity, get_jwt
 from flask_smorest import Blueprint
@@ -14,7 +15,8 @@ user_bp = Blueprint("users", __name__)
 def user_login(**kwargs):
     username = kwargs['username']
     password = kwargs['password']
-    return UserService.handle_login(username, password)
+    token = UserService.handle_login(username, password)
+    return jsonify({'token': token})
 
 
 @user_bp.route('/logout', methods=['DELETE'])
@@ -22,12 +24,28 @@ def user_login(**kwargs):
 def user_logout(**kwargs):
     jti = get_jwt()["jti"]
     UserService.handle_logout(jti)
-    return "success"
+    return jsonify({"status": "success"})
+
+
+@user_bp.route('/profile', methods=['GET'])
+@require_auth([])
+def get_profile():
+    user_id = get_jwt_identity()
+    user = UserService.get_user(user_id)
+    user_data = {
+        "user_id": user.user_id,
+        "username": user.username,
+        "email": user.email,
+        "created_at": user.created_at,
+        "role_id": user.role_id
+    }
+
+    return jsonify(user_data)
 
 
 @user_bp.route("/register", methods=['POST'])
 @user_bp.arguments(RegisterRequestSchema, as_kwargs=True)
-def user_login(**kwargs):
+def user_register(**kwargs):
     email = kwargs['email']
     username = kwargs['username']
     password = kwargs['password']

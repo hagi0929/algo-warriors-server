@@ -36,12 +36,12 @@ class ProblemRepos:
             NATURAL LEFT JOIN ProblemTag pt
             NATURAL LEFT JOIN Tag t
         """
-        where_query = ""
+        where_query = []
         group_query = "p.problem_id, p.title"
         order_query = ""
         parameters = {}
         if 'title' in filters:
-            where_query += "WHERE p.title ILIKE :title"
+            where_query.append("p.title ILIKE :title")
             parameters["title"] = f"%{filters['title']}%"
 
         if 'categories' in filters:
@@ -53,6 +53,10 @@ class ProblemRepos:
             """
             parameters["categories"] = tuple(filters['categories'])
 
+        if 'contest_id' in filters:
+            from_query += " NATURAL JOIN ContestProblem c"
+            where_query.append("c.contest_id = :contest_id")
+            parameters["contest_id"] = filters['contest_id']
 
         if 'difficulty' in filters:
             group_query += " HAVING MAX(t.tag_id) FILTER (WHERE t.type = 'difficulty') IN :difficulty"
@@ -66,10 +70,13 @@ class ProblemRepos:
         parameters["limit"] = pagination.get('page_size', 10)
         parameters["offset"] = (pagination.get('page_index', 1) - 1) * pagination.get('page_size', 10)
 
+        raw_where_query = ""
+        if len(where_query) > 0:
+            raw_where_query += " WHERE " + " , ".join(where_query) + " "
         query = f"""
         SELECT {select_query} 
         FROM {from_query} 
-        {where_query} 
+        {raw_where_query} 
         GROUP BY {group_query} 
         {order_query} 
         LIMIT :limit OFFSET :offset

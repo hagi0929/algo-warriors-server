@@ -75,10 +75,55 @@ def get_problem_list():
     return jsonify(problems)
 
 
+class ProblemDashboardSchema(Schema):
+    problem_id = fields.Int()
+    title = fields.Str()
+    difficulty = fields.Int()
+    categories = fields.Int(many=True)
+
+
+class ProblemFilterSchema(Schema):
+    title = fields.String(required=False)
+    difficulty = fields.String(required=False)
+    categories = fields.String(required=False)
+    contest_id = fields.String(required=False)
+    sort_by = fields.String(required=False)
+
+
+class PagenationSchema(Schema):
+    page_index = fields.Int()
+    page_size = fields.Int()
+
+
+@problem_bp.route('/dashboard-list', methods=['GET'])
+@problem_bp.response(200, ProblemDashboardSchema(many=True))
+@problem_bp.arguments(PagenationSchema, location="query", as_kwargs=True)
+@problem_bp.arguments(ProblemFilterSchema, location="query", as_kwargs=True)
+def get_problem_dashboard_list(**kwargs):
+    filter_options = {}
+    if "categories" in kwargs and kwargs["categories"]:
+        filter_options["categories"] = kwargs["categories"].split(',')
+    if "difficulty" in kwargs and kwargs["difficulty"]:
+        filter_options["difficulty"] = kwargs["difficulty"].split(',')
+    if "title" in kwargs and kwargs["title"]:
+        filter_options["title"] = kwargs["title"]
+    if "contest_id" in kwargs and kwargs["contest_id"]:
+        filter_options["contest_id"] = kwargs["contest_id"]
+    if "sort_by" in kwargs and kwargs["sort_by"]:
+        filter_options["sort_by"] = kwargs["sort_by"]
+
+    pagination = {
+        'page_size': request.args.get('page_size', 10, type=int),
+        'page_index': request.args.get('page_index', 1, type=int)
+    }
+    problems = [vars(p) for p in ProblemService.get_problem_dashboard_list(filter_options, pagination)]
+    return jsonify(problems)
+
+
 @problem_bp.route('/<int:problem_id>', methods=['GET'])
 @problem_bp.response(200, ProblemSchema)
 @problem_bp.doc(responses={404: "Problem not found"})
-#@require_auth([])
+# @require_auth([])
 def get_problem(problem_id):
     problem = ProblemService.get_problem_by_id(problem_id)
     if problem is None:

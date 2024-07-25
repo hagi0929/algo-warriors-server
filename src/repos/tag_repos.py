@@ -6,11 +6,17 @@ from ..model.problem import ProblemDetailed, ProblemMinimal
 
 class TagRepos:
     @staticmethod
-    def get_tag_list() -> list[Tag]:
+    def get_tag_list(tag_type=None) -> list[Tag]:
         query = text("""
         SELECT tag_id, type, content FROM Tag
         """)
-        result = db.session.execute(query)
+        parameters = {}
+        if tag_type is not None and tag_type in ["subcategory", "source", "difficulty"]:
+            query = text("""
+        SELECT tag_id, type, content FROM Tag WHERE type = :type
+        """)
+            parameters["type"] = tag_type
+        result = db.session.execute(query, parameters)
         tags = []
         for row in result:
             tags.append(Tag(

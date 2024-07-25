@@ -5,8 +5,8 @@ from ..repos.tag_repos import TagRepos
 
 class TagService:
     @staticmethod
-    def get_tag_list():
-        return TagRepos.get_tag_list()
+    def get_tag_list(tag_type=None):
+        return TagRepos.get_tag_list(tag_type)
 
     @staticmethod
     def get_tag_by_id(tag_id: int):

@@ -1,6 +1,6 @@
 from sqlalchemy.sql import text
 from .. import db
-from ..model.problem import ProblemMinimal, ProblemDetailed, ProblemCreationRequest
+from ..model.problem import ProblemMinimal, ProblemDetailed, ProblemCreationRequest, ProblemDashboard
 from ..model.test_case import TestCase
 
 
@@ -16,6 +16,73 @@ class ProblemRepos:
             problems.append(ProblemMinimal(
                 problem_id=row[0],
                 title=row[1]
+            ))
+
+        return problems
+
+    # (SELECT DISTINCT problem_id FROM ProblemTag WHERE pt.tag_id in:tags)
+    # p
+    @staticmethod
+    def get_problem_dashboard_list(filters: dict, pagination=None) -> list[ProblemDashboard]:
+        if pagination is None:
+            pagination = {}
+        select_query = """
+            p.problem_id, p.title,
+                   array_agg(t.tag_id) FILTER (WHERE t.type = 'subcategory') as tags,
+                   MAX(t.tag_id) FILTER (WHERE t.type = 'difficulty') as difficulty
+        """
+        from_query = """
+            Problem p
+            NATURAL LEFT JOIN ProblemTag pt
+            NATURAL LEFT JOIN Tag t
+        """
+        where_query = ""
+        group_query = "p.problem_id, p.title"
+        order_query = ""
+        parameters = {}
+        if 'title' in filters:
+            where_query += "WHERE p.title ILIKE :title"
+            parameters["title"] = f"%{filters['title']}%"
+
+        if 'categories' in filters:
+            from_query = """
+            (SELECT DISTINCT problem_id FROM ProblemTag WHERE tag_id IN :categories) as ptemp
+            NATURAL LEFT JOIN Problem p
+            NATURAL LEFT JOIN ProblemTag pt
+            NATURAL LEFT JOIN Tag t
+            """
+            parameters["categories"] = tuple(filters['categories'])
+
+
+        if 'difficulty' in filters:
+            group_query += " HAVING MAX(t.tag_id) FILTER (WHERE t.type = 'difficulty') IN :difficulty"
+            parameters["difficulty"] = tuple(filters['difficulty'])
+
+        if 'sort_by' in filters:
+            column = filters['sort_by']
+            if column in ["problem_id", "title", "difficulty"]:
+                order_query = f"ORDER BY {column}"
+
+        parameters["limit"] = pagination.get('page_size', 10)
+        parameters["offset"] = (pagination.get('page_index', 1) - 1) * pagination.get('page_size', 10)
+
+        query = f"""
+        SELECT {select_query} 
+        FROM {from_query} 
+        {where_query} 
+        GROUP BY {group_query} 
+        {order_query} 
+        LIMIT :limit OFFSET :offset
+        """
+
+        result = db.session.execute(text(query), parameters)
+        problems = []
+        for row in result:
+            problems.append(ProblemDashboard(
+                problem_id=row[0],
+                title=row[1],
+                categories=row[2],
+                difficulty=row[3]
             ))
 
         return problems
@@ -40,6 +107,7 @@ class ProblemRepos:
             created_at=row[4],
         )
         return problem
+
     @staticmethod
     def get_testcases_by_problem_id(problem_id: int, include_private: bool = False) -> list[TestCase]:
         query = text("""

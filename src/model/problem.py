@@ -16,7 +16,22 @@ class ProblemMinimal(AbstractProblem):
     def to_dict(self) -> dict:
         return {
             'problem_id': self.problem_id,
-            'title': self.title
+            'title': self.title,
+        }
+
+
+class ProblemDashboard(AbstractProblem):
+    def __init__(self, problem_id: int, title: str, categories: List[int], difficulty: int):
+        super().__init__(problem_id, title)
+        self.categories: List[int] = categories
+        self.difficulty: int = difficulty
+
+    def to_dict(self) -> dict:
+        return {
+            'problem_id': self.problem_id,
+            'title': self.title,
+            'categories': self.categories,
+            'difficulty': self.difficulty,
         }
 
 

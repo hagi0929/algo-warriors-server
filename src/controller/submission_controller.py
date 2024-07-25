@@ -11,7 +11,9 @@ def submit_code():
     code = request.json.get('code')
     problem_id = request.json.get('problem_id')
     programming_language = request.json.get('programming_language')
+    print(code)
     return SubmissionService.submit_code(code, problem_id, programming_language)
+    #return [{"message": "Code submitted successfully"}], 200
 
 
 @submission_bp.route('/available_languages', methods=['GET'])

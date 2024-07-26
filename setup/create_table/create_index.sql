@@ -76,3 +76,4 @@ CREATE CLUSTERED INDEX idx_popupresourcesview_resource_name ON PopupResourcesVie
 CREATE NONCLUSTERED INDEX idx_popupresourcesview_resource_url ON PopupResourcesView (resource_url);
 CREATE NONCLUSTERED INDEX idx_popupresourcesview_homepage ON PopupResourcesView (homepage);
 CREATE NONCLUSTERED INDEX idx_popupresourcesview_resource_language ON PopupResourcesView (resource_language);
+

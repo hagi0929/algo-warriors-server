@@ -3,19 +3,19 @@
 import json
 import psycopg2
 from psycopg2 import sql
-from dotenv import dotenv_values
+from dotenv import load_dotenv
+import os
 
 
-env_vars = dotenv_values('.env')
-
+load_dotenv()
 
 def connect_db():
     conn_params = {
-        'dbname': 'cs348proj',
-        'user': 'cs348',
-        'password': 'cs348',
-        'host': '132.145.98.138',
-        'port': '5432'
+        'dbname': os.getenv('DB_NAME'),
+        'user': os.getenv('DB_USER'),
+        'password': os.getenv('DB_PASSWORD'),
+        'host': os.getenv('DB_HOST'),
+        'port': os.getenv('DB_PORT')
     }
     try:
         print("Attempting to connect to the database...")
@@ -25,7 +25,6 @@ def connect_db():
     except Exception as e:
         print(f"Error connecting to database: {e}")
         return None
-
 
 def execute_query(conn, query, params=()):
     cursor = conn.cursor()
@@ -73,15 +72,13 @@ def process_json_file(json_file, conn):
 
 
 if __name__ == "__main__":
-    json_file_path = 'discussions.json'
-    
-    
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    json_file_path = os.path.join(script_dir, 'discussions.json')
+
     connection = connect_db()
     if connection:
         try:
-            
             process_json_file(json_file_path, connection)
         finally:
-            
             connection.close()
             print("Connection closed.")

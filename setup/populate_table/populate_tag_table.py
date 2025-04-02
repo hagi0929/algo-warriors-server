@@ -1,15 +1,18 @@
 import json
 import psycopg2
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 
+import os
+
+load_dotenv()
 
 def connect_db():
     conn_params = {
-        'dbname': 'cs348proj',
-        'user': 'cs348',
-        'password': 'cs348',
-        'host': '132.145.98.138',
-        'port': '5432'
+        'dbname': os.getenv('DB_NAME'),
+        'user': os.getenv('DB_USER'),
+        'password': os.getenv('DB_PASSWORD'),
+        'host': os.getenv('DB_HOST'),
+        'port': os.getenv('DB_PORT')
     }
     print("Attempting to connect to the database...")
     connection = psycopg2.connect(**conn_params)
@@ -67,7 +70,8 @@ def process_problems_file(json_file, conn):
 
 
 if __name__ == "__main__":
-    problems_json_file = 'problems.json'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    problems_json_file = os.path.join(script_dir, 'problems.json')
 
     connection = connect_db()
     if connection:

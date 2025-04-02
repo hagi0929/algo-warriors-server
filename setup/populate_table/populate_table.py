@@ -1,6 +1,10 @@
 import psycopg2
 import json
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
 
 def read_json_file(file_path):
     with open(file_path, 'r') as json_file:
@@ -8,18 +12,18 @@ def read_json_file(file_path):
 
 
 def insert_data():
-    user_data = read_json_file('users.json')
-    problem_data = read_json_file('problems.json')
-    test_case_data = read_json_file('test_cases.json')
-
-    discussions_data = read_json_file('discussions.json')
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    user_data = read_json_file(os.path.join(script_dir, 'users.json'))
+    problem_data = read_json_file(os.path.join(script_dir, 'problems.json'))
+    test_case_data = read_json_file(os.path.join(script_dir, 'test_cases.json'))
+    discussions_data = read_json_file(os.path.join(script_dir, 'discussions.json'))
 
     db_params = {
-        'dbname': 'cs348proj',
-        'user': 'cs348',
-        'password': 'cs348',
-        'host': '132.145.98.138',
-        'port': '5432'
+        'dbname': os.getenv('DB_NAME'),
+        'user': os.getenv('DB_USER'),
+        'password': os.getenv('DB_PASSWORD'),
+        'host': os.getenv('DB_HOST'),
+        'port': os.getenv('DB_PORT')
     }
 
     print("Attempting to connect to the database...")
@@ -30,7 +34,7 @@ def insert_data():
     user_id = 1
     insert_problem_query = """
     INSERT INTO Problem (problem_id, title, description, created_by)
-    VALUES (%s, %s, %s, %s, %s)
+    VALUES (%s, %s, %s, %s)
     RETURNING problem_id
     """
     for problem in problem_data:

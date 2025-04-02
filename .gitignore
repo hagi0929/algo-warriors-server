@@ -15,4 +15,3 @@ env.bak/
 venv.bak/
 
 cython_debug/
-/poetry.lock

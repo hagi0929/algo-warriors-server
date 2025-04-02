@@ -1,3 +1,11 @@
+CREATE INDEX idx_tag_type_content ON Tag (type, content);
+CREATE INDEX idx_problem_tag_problem_id ON ProblemTag (problem_id);
+CREATE INDEX idx_problem_tag_tag_id ON ProblemTag (tag_id);
+
+CREATE INDEX idx_discussion_problem_id ON Discussion (problem_id);
+CREATE INDEX idx_discussion_discussion_id ON Discussion (discussion_id);
+CREATE INDEX idx_discussion_parentdiscussion_id ON Discussion (parentdiscussion_id);
+
 -- Role table
 CREATE UNIQUE INDEX idx_role_role_id ON Role (role_id);
 CREATE CLUSTERED INDEX idx_role_role_name ON Role (role_name);

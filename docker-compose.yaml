@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - "3000:5001"
+    env_file:
+      - .env
+    environment:
+      - SEED_DB=true  # set to "true" to run seed scripts at startup
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: cs348proj
+      POSTGRES_PASSWORD: cs348proj
+      POSTGRES_DB: cs348proj
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  pgdata:

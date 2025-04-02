@@ -27,7 +27,7 @@ class Config:
 class DevConfig(Config):
     FLASK_ENV = "development"
     DEBUG = True
-    PORT = 3000
+    PORT = 5001
 
     def get_db_conn(self):
         host = os.environ["DB_HOST"]
